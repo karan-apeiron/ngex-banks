@@ -1,0 +1,2956 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 100vh;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+
+      #legend {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        padding: 10px;
+        margin: 10px;
+        border: 3px solid #000;
+      }
+
+      #legend h3 {
+        margin-top: 0;
+      }
+
+      #legend img {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <div id="legend">
+      <h3>Legend</h3>
+    </div>
+
+    <script>
+      // Initialize and add the map
+      diamondBank = [
+        {
+          id: 5253,
+          business_id: "bid4df860c338a6c",
+          business_name: "Diamond Bank",
+          address1: "2, Asa Road",
+          lat: "4.9671977",
+          lon: "7.2809127"
+        },
+        {
+          id: 5257,
+          business_id: "bid4df865b2050ff",
+          business_name: "Diamond Bank",
+          address1: "222 Ikwerre Road",
+          lat: "4.793615",
+          lon: "6.9955562"
+        },
+        {
+          id: 6511,
+          business_id: "bid4e15bb4ce15af",
+          business_name: "Diamond Bank",
+          address1: "2 Eziukwu Road",
+          lat: "5.1084573",
+          lon: "7.3611443"
+        },
+        {
+          id: 6512,
+          business_id: "bid4e15be42b1543",
+          business_name: "Diamond Bank",
+          address1: "118, Nnamdi Azikiwe Street",
+          lat: "6.4537181",
+          lon: "3.3896541"
+        },
+        {
+          id: 6532,
+          business_id: "bid4e169d5460155",
+          business_name: "Diamond Bank",
+          address1: "71, Elekahia Industrial Estate Road",
+          lat: "4.8404951",
+          lon: "7.036989"
+        },
+        {
+          id: 6533,
+          business_id: "bid4e16a3ce32632",
+          business_name: "Diamond Bank",
+          address1: "25 Asa Afariogun Street",
+          lat: "6.5457418",
+          lon: "3.3263081"
+        },
+        {
+          id: 6562,
+          business_id: "bid4e16c1a28d9b2",
+          business_name: "Diamond Bank",
+          address1: "63, New Market Road",
+          lat: "6.1506886",
+          lon: "6.7770785"
+        },
+        {
+          id: 19868,
+          business_id: "bid4df85da9b6c3d",
+          business_name: "Diamond Bank",
+          address1: "1261, Adeola Hopewell Street",
+          lat: "6.4346649",
+          lon: "3.4293844"
+        },
+        {
+          id: 19869,
+          business_id: "bid5209f4e6d6d49",
+          business_name: "Diamond Bank",
+          address1: "4, Lekki-Epe Express Way",
+          lat: "6.4343557",
+          lon: "3.4918615"
+        },
+        {
+          id: 26784,
+          business_id: "bid534be5a62ab1c",
+          business_name: "Diamond Bank",
+          address1: "136, Balogun Street",
+          lat: "6.4973519",
+          lon: "3.3603192"
+        },
+        {
+          id: 26785,
+          business_id: "bid534be67be3f50",
+          business_name: "Diamond Bank",
+          address1: "121, Broad Street",
+          lat: "6.4561759",
+          lon: "3.3824763"
+        },
+        {
+          id: 26786,
+          business_id: "bid534be9af29bb7",
+          business_name: "Diamond Bank",
+          address1: "74, Abak Road",
+          lat: "5.0195364",
+          lon: "7.8865805"
+        },
+        {
+          id: 26788,
+          business_id: "bid534beb14da6eb",
+          business_name: "Diamond Bank",
+          address1: "Alaba International Market",
+          lat: "6.4619141",
+          lon: "3.1578875"
+        },
+        {
+          id: 26790,
+          business_id: "bid534bec9855611",
+          business_name: "Diamond Bank",
+          address1: "Alaba International Market",
+          lat: "6.4619141",
+          lon: "3.1578875"
+        },
+        {
+          id: 26796,
+          business_id: "bid534bf178dc87e",
+          business_name: "Diamond Bank",
+          address1: "Abdulkadir Ahmed Road",
+          lat: "10.315833",
+          lon: "9.844167"
+        },
+        {
+          id: 26798,
+          business_id: "bid534bf3d84fd6c",
+          business_name: "Diamond Bank",
+          address1: "Faulks Road",
+          lat: "5.1145948",
+          lon: "7.3418002"
+        },
+        {
+          id: 26799,
+          business_id: "bid534bf454ad3e9",
+          business_name: "Diamond Bank",
+          address1: "Umuakpara Osisioma",
+          lat: "5.1500592",
+          lon: "7.3303485"
+        },
+        {
+          id: 26801,
+          business_id: "bid534bf639a07f9",
+          business_name: "Diamond Bank",
+          address1: "20, Ngwa Road",
+          lat: "5.1000268",
+          lon: "7.3722637"
+        },
+        {
+          id: 26802,
+          business_id: "bid534bf63dc62d3",
+          business_name: "Diamond Bank",
+          address1: "2, Owerri Road",
+          lat: "5.5399118",
+          lon: "7.4963116"
+        },
+        {
+          id: 26804,
+          business_id: "bid534bf7a8483bb",
+          business_name: "Diamond Bank",
+          address1: "1486, Ahmadu Bello Way",
+          lat: "9.0335996",
+          lon: "7.4969866"
+        },
+        {
+          id: 26805,
+          business_id: "bid534bf7b1c2331",
+          business_name: "Diamond Bank",
+          address1: "Ikot-Ekpene Road",
+          lat: "5.1101426",
+          lon: "7.4071655"
+        },
+        {
+          id: 26806,
+          business_id: "bid534bf93e7f8a0",
+          business_name: "Diamond Bank",
+          address1: "Building Material Market",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 26807,
+          business_id: "bid534bf9770ffb4",
+          business_name: "Diamond Bank",
+          address1: "10, Galadima Aminu Way",
+          lat: "9.2592037",
+          lon: "12.4557993"
+        },
+        {
+          id: 26809,
+          business_id: "bid534bfb20bc00d",
+          business_name: "Diamond Bank",
+          address1: "6-8, Grace Bill Road",
+          lat: "4.6356419",
+          lon: "7.9312616"
+        },
+        {
+          id: 26810,
+          business_id: "bid534bfbbfe6aef",
+          business_name: "Diamond Bank",
+          address1: "792, Mohammed Buhari Way",
+          lat: "9.0405758",
+          lon: "7.4879694"
+        },
+        {
+          id: 26812,
+          business_id: "bid534bfd396b538",
+          business_name: "Diamond Bank",
+          address1: "273, Central Business Area",
+          lat: "9.0360686",
+          lon: "7.4895133"
+        },
+        {
+          id: 26813,
+          business_id: "bid534bfd3e55a5f",
+          business_name: "Diamond Bank",
+          address1: "Opposite Nyanya Shopping Complex",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 26814,
+          business_id: "bid534bfe725aa32",
+          business_name: "Diamond Bank",
+          address1: "792, Mohammed Buhari Way",
+          lat: "9.0405758",
+          lon: "7.4879694"
+        },
+        {
+          id: 26815,
+          business_id: "bid534bff3f7cea0",
+          business_name: "Diamond Bank",
+          address1: "21, Adetokunbo Ademola Crescent",
+          lat: "9.0767611",
+          lon: "7.4875772"
+        },
+        {
+          id: 26816,
+          business_id: "bid534bfff349b8f",
+          business_name: "Diamond Bank",
+          address1: "144, Gudu Market",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 26817,
+          business_id: "bid534c015cc5847",
+          business_name: "Diamond Bank",
+          address1: "Three Arms Zone",
+          lat: "9.0657048",
+          lon: "7.5111876"
+        },
+        {
+          id: 26818,
+          business_id: "bid534c01c146634",
+          business_name: "Diamond Bank",
+          address1: "2097, Herbert Macaulay Way",
+          lat: "9.0647999",
+          lon: "7.4704384"
+        },
+        {
+          id: 26820,
+          business_id: "bid534c03376d04a",
+          business_name: "Diamond Bank",
+          address1: "21, Gana Street",
+          lat: "9.0775187",
+          lon: "7.4979633"
+        },
+        {
+          id: 26822,
+          business_id: "bid534c04344944e",
+          business_name: "Diamond Bank",
+          address1: "52, Park Lane",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 26824,
+          business_id: "bid534c054c549a4",
+          business_name: "Diamond Bank",
+          address1: "Aminu Kano Crescent",
+          lat: "9.083159",
+          lon: "7.4688714"
+        },
+        {
+          id: 26829,
+          business_id: "bid534c058e7a3bd",
+          business_name: "Diamond Bank",
+          address1: "283, Ladoke Akintola Blvd",
+          lat: "9.0235548",
+          lon: "7.4884415"
+        },
+        {
+          id: 26831,
+          business_id: "bid534c07c4bf075",
+          business_name: "Diamond Bank",
+          address1: "New Karu",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 26833,
+          business_id: "bid534c0a15e888c",
+          business_name: "Diamond Bank",
+          address1: "Essienton Road",
+          lat: "5.0377396",
+          lon: "7.9127945"
+        },
+        {
+          id: 26834,
+          business_id: "bid534c0a3c10132",
+          business_name: "Diamond Bank",
+          address1: "New Karu",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 26835,
+          business_id: "bid534c0a4101ca9",
+          business_name: "Diamond Bank",
+          address1: "Essienton Road",
+          lat: "5.0377396",
+          lon: "7.9127945"
+        },
+        {
+          id: 26836,
+          business_id: "bid534c0c3997437",
+          business_name: "Diamond Bank",
+          address1: "1st Avenue Gwarinpa",
+          lat: "9.0888888",
+          lon: "7.4088299"
+        },
+        {
+          id: 26954,
+          business_id: "bid534e461b29bd6",
+          business_name: "Diamond Bank",
+          address1: "1, Sokoto Road",
+          lat: "13.0395486",
+          lon: "5.1860387"
+        },
+        {
+          id: 26955,
+          business_id: "bid534e47308c31e",
+          business_name: "Diamond Bank",
+          address1: "Nnamdi Azikiwe University",
+          lat: "6.2454944",
+          lon: "7.124607"
+        },
+        {
+          id: 26956,
+          business_id: "bid534e4a4160a34",
+          business_name: "Diamond Bank",
+          address1: "Ogbaru Enamel Ware Market",
+          lat: "6.166667",
+          lon: "6.783333"
+        },
+        {
+          id: 26957,
+          business_id: "bid534e4a492171b",
+          business_name: "Diamond Bank",
+          address1: "46 Iweka Road",
+          lat: "6.1423682",
+          lon: "6.782282"
+        },
+        {
+          id: 26960,
+          business_id: "bid534e4bae51527",
+          business_name: "Diamond Bank",
+          address1: "1/3, Edo-Ezemewi Street",
+          lat: "6.0105192",
+          lon: "6.9103455"
+        },
+        {
+          id: 26961,
+          business_id: "bid534e4bb31dc05",
+          business_name: "Diamond Bank",
+          address1: "63, New Market",
+          lat: "6.1506886",
+          lon: "6.7770785"
+        },
+        {
+          id: 26963,
+          business_id: "bid534e4d9d4418c",
+          business_name: "Diamond Bank",
+          address1: "Old Nkwo Market Road",
+          lat: "6.0105192",
+          lon: "6.9103455"
+        },
+        {
+          id: 26969,
+          business_id: "bid534e538fae38a",
+          business_name: "Diamond Bank",
+          address1: "8, City Biscuit Road",
+          lat: "6.1146964",
+          lon: "6.8283462"
+        },
+        {
+          id: 26971,
+          business_id: "bid534e5391cddde",
+          business_name: "Diamond Bank",
+          address1: "37",
+          lat: "6.1023699",
+          lon: "6.7598695"
+        },
+        {
+          id: 26972,
+          business_id: "bid534e56a601e37",
+          business_name: "Diamond Bank",
+          address1: "Enugu/Onitsha Expressway",
+          lat: "6.2343012",
+          lon: "7.1010809"
+        },
+        {
+          id: 26973,
+          business_id: "bid534e56b597147",
+          business_name: "Diamond Bank",
+          address1: "1, Demude Street",
+          lat: "6.15",
+          lon: "6.833333"
+        },
+        {
+          id: 26974,
+          business_id: "bid534e5926a28c7",
+          business_name: "Diamond Bank",
+          address1: "Balogun Business Association",
+          lat: "6.416667",
+          lon: "2.883333"
+        },
+        {
+          id: 26975,
+          business_id: "bid534e592ae0003",
+          business_name: "Diamond Bank",
+          address1: "Agittarius Block",
+          lat: "6.45",
+          lon: "3.366667"
+        },
+        {
+          id: 26976,
+          business_id: "bid534e5acdb3e71",
+          business_name: "Diamond Bank",
+          address1: "16, Creek Road",
+          lat: "6.437673",
+          lon: "3.3724372"
+        },
+        {
+          id: 26977,
+          business_id: "bid534e5c6cbfa74",
+          business_name: "Diamond Bank",
+          address1: "1, Market Street",
+          lat: "6.4805951",
+          lon: "3.386085"
+        },
+        {
+          id: 26978,
+          business_id: "bid534e5c7c8aa8d",
+          business_name: "Diamond Bank",
+          address1: "19, Lagos/ Badagry Expressway",
+          lat: "6.6136063",
+          lon: "3.3471908"
+        },
+        {
+          id: 26980,
+          business_id: "bid534e5da8612e7",
+          business_name: "Diamond Bank",
+          address1: "60, Opebi Road",
+          lat: "6.5884282",
+          lon: "3.3618636"
+        },
+        {
+          id: 26981,
+          business_id: "bid534e5db1b07ae",
+          business_name: "Diamond Bank",
+          address1: "10, Opebi Road",
+          lat: "6.5889754",
+          lon: "3.3614442"
+        },
+        {
+          id: 26983,
+          business_id: "bid534e61d2b185f",
+          business_name: "Diamond Bank",
+          address1: "34, Ladipo Oluwole Street",
+          lat: "6.6146114",
+          lon: "3.3459859"
+        },
+        {
+          id: 26984,
+          business_id: "bid534e61d650eb8",
+          business_name: "Diamond Bank",
+          address1: "30, Apapa Oshodi Expressway",
+          lat: "6.4410076",
+          lon: "3.3308993"
+        },
+        {
+          id: 26987,
+          business_id: "bid534e62e12d1a8",
+          business_name: "Diamond Bank",
+          address1: "80, Awolowo Road",
+          lat: "6.4422437",
+          lon: "3.4191964"
+        },
+        {
+          id: 26988,
+          business_id: "bid534e6348cc116",
+          business_name: "Diamond Bank",
+          address1: "25, Asa-Afariogun Street",
+          lat: "6.5457418",
+          lon: "3.3263081"
+        },
+        {
+          id: 26990,
+          business_id: "bid534e691fa17b5",
+          business_name: "Diamond Bank",
+          address1: "36, Ijaiye Road",
+          lat: "6.6288884",
+          lon: "3.3379866"
+        },
+        {
+          id: 26991,
+          business_id: "bid534e6942a9f3e",
+          business_name: "Diamond Bank",
+          address1: "31, Bode Thomas Street",
+          lat: "6.4901264",
+          lon: "3.3547339"
+        },
+        {
+          id: 26993,
+          business_id: "bid534e6ae87c9ae",
+          business_name: "Diamond Bank",
+          address1: "238, Herbert Macaulay Street",
+          lat: "6.4997372",
+          lon: "3.3784193"
+        },
+        {
+          id: 26994,
+          business_id: "bid534e6af375b0e",
+          business_name: "Diamond Bank",
+          address1: "Shop 41",
+          lat: "6.431111",
+          lon: "3.415833"
+        },
+        {
+          id: 26997,
+          business_id: "bid534e6d23b02c8",
+          business_name: "Diamond Bank",
+          address1: "116/118, Ago Palace Way",
+          lat: "6.502206",
+          lon: "3.3050823"
+        },
+        {
+          id: 26998,
+          business_id: "bid534e6d27cae3d",
+          business_name: "Diamond Bank",
+          address1: "Shop, C96 -101",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 26999,
+          business_id: "bid534e6ed029fd9",
+          business_name: "Diamond Bank",
+          address1: "4, Old Ojo Road",
+          lat: "6.4587137",
+          lon: "3.2987966"
+        },
+        {
+          id: 27000,
+          business_id: "bid534e6ede16094",
+          business_name: "Diamond Bank",
+          address1: "1609, 4th Avenue",
+          lat: "6.4759598",
+          lon: "3.2799259"
+        },
+        {
+          id: 27003,
+          business_id: "bid534e734f3e270",
+          business_name: "Diamond Bank",
+          address1: "10, Lekki Penisula",
+          lat: "6.4349828",
+          lon: "3.4817407"
+        },
+        {
+          id: 27004,
+          business_id: "bid534e7350b5af1",
+          business_name: "Diamond Bank",
+          address1: "281, Agege Motor Road",
+          lat: "6.5271803",
+          lon: "3.3544998"
+        },
+        {
+          id: 27007,
+          business_id: "bid534e75db53766",
+          business_name: "Diamond Bank",
+          address1: "77/79, Old Ewu Road",
+          lat: "6.5567763",
+          lon: "3.3255919"
+        },
+        {
+          id: 27008,
+          business_id: "bid534e762550957",
+          business_name: "Diamond Bank",
+          address1: "Shop 661-670, Daleko Market",
+          lat: "6.533333",
+          lon: "3.35"
+        },
+        {
+          id: 27009,
+          business_id: "bid534e76d586d3e",
+          business_name: "Diamond Bank",
+          address1: "17, Ogeretedo Street",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 27010,
+          business_id: "bid534e77af315f7",
+          business_name: "Diamond Bank",
+          address1: "103/105, St. Finbarrs Road",
+          lat: "6.5421855",
+          lon: "3.3931544"
+        },
+        {
+          id: 27011,
+          business_id: "bid534e79f8a962d",
+          business_name: "Diamond Bank",
+          address1: "33, Ogunlana Drive",
+          lat: "6.5064308",
+          lon: "3.3524079"
+        },
+        {
+          id: 27012,
+          business_id: "bid534e79ffdc00a",
+          business_name: "Diamond Bank",
+          address1: "608, Lagos - Ikorodu Road,",
+          lat: "6.6062887",
+          lon: "3.3923939"
+        },
+        {
+          id: 27013,
+          business_id: "bid534e7a3f7c316",
+          business_name: "Diamond Bank",
+          address1: "House 20",
+          lat: "6.449375",
+          lon: "3.2668825"
+        },
+        {
+          id: 27014,
+          business_id: "bid534e7c007a6af",
+          business_name: "Diamond bank",
+          address1: "71, Enu Owa Street",
+          lat: "6.4626536",
+          lon: "3.3892196"
+        },
+        {
+          id: 27016,
+          business_id: "bid534e7e31aaf36",
+          business_name: "Diamond Bank",
+          address1: "166, Abeokuta Expressway",
+          lat: "6.6207647",
+          lon: "3.3037767"
+        },
+        {
+          id: 27017,
+          business_id: "bid534e7e36b2d20",
+          business_name: "Diamond Bank",
+          address1: "55/57 New Ipaja Road",
+          lat: "",
+          lon: ""
+        },
+        {
+          id: 27018,
+          business_id: "bid534e7e3b840b7",
+          business_name: "Diamond Bank",
+          address1: "7 Idumagbo Road",
+          lat: "6.4588425",
+          lon: "3.3896442"
+        },
+        {
+          id: 27059,
+          business_id: "bid534fb3e6d641d",
+          business_name: "Diamond Bank",
+          address1: "190, Agege Motor Road",
+          lat: "6.5271803",
+          lon: "3.3544998"
+        },
+        {
+          id: 27060,
+          business_id: "bid534fb5705c347",
+          business_name: "Diamond Bank",
+          address1: "Karimu Street",
+          lat: "6.5000477",
+          lon: "3.3567205"
+        },
+        {
+          id: 27061,
+          business_id: "bid534fb575179b0",
+          business_name: "Diamond Bank",
+          address1: "Nigeria Avaition Handling Compnay",
+          lat: "6.601838",
+          lon: "3.3514863"
+        },
+        {
+          id: 27062,
+          business_id: "bid534fb6aea4c47",
+          business_name: "Diamond Bank",
+          address1: "21, Liverpool",
+          lat: "6.4485219",
+          lon: "3.3670583"
+        },
+        {
+          id: 27063,
+          business_id: "bid534fb6b322748",
+          business_name: "Diamond Bank",
+          address1: "Seme Border",
+          lat: "6.416667",
+          lon: "2.883333"
+        },
+        {
+          id: 27065,
+          business_id: "bid534fb928d379c",
+          business_name: "Diamond Bank",
+          address1: "Roro Port",
+          lat: "6.45",
+          lon: "3.366667"
+        },
+        {
+          id: 27066,
+          business_id: "bid534fb9301783b",
+          business_name: "Diamond Bank",
+          address1: "J, Asitabi Cole Street",
+          lat: "6.6205999",
+          lon: "3.3550748"
+        },
+        {
+          id: 27077,
+          business_id: "bid534fdffa29d73",
+          business_name: "Diamond Bank",
+          address1: "71, College Road",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 27078,
+          business_id: "bid534fe00a860af",
+          business_name: "Diamond Bank",
+          address1: "32, Ikorodu Road",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 27079,
+          business_id: "bid534fe05a7a2e8",
+          business_name: "Diamond Bank",
+          address1: "21- 23",
+          lat: "6.4702622",
+          lon: "3.2924297"
+        },
+        {
+          id: 27080,
+          business_id: "bid534fe2882a04f",
+          business_name: "Diamond Bank",
+          address1: "37, Old Ojo Road",
+          lat: "6.4544574",
+          lon: "3.2517171"
+        },
+        {
+          id: 27081,
+          business_id: "bid534fe28e6e8ac",
+          business_name: "Diamond Bank",
+          address1: "51, Mushin Road",
+          lat: "6.5309751",
+          lon: "3.3424874"
+        },
+        {
+          id: 27082,
+          business_id: "bid534fe28f6dfaf",
+          business_name: "Diamond Bank",
+          address1: "20, Diya Street",
+          lat: "6.647452",
+          lon: "3.3006266"
+        },
+        {
+          id: 27085,
+          business_id: "bid534fe6cb6d6cd",
+          business_name: "Diamond Bank",
+          address1: "11, Burma Road",
+          lat: "6.4381496",
+          lon: "3.3681063"
+        },
+        {
+          id: 27086,
+          business_id: "bid534fe6cf94fa7",
+          business_name: "Diamond Bank",
+          address1: "E Ziatech Road",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 27087,
+          business_id: "bid534fe6d390701",
+          business_name: "Diamond Bank",
+          address1: "26, Ilupeju Byepass",
+          lat: "6.5455723",
+          lon: "3.3596799"
+        },
+        {
+          id: 27088,
+          business_id: "bid534ff0054f56a",
+          business_name: "Diamond Bank",
+          address1: "Iddo Market Mini",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 27089,
+          business_id: "bid534ff03a0706b",
+          business_name: "Diamond Bank",
+          address1: "20, Idimu Road",
+          lat: "6.5505592",
+          lon: "3.2683885"
+        },
+        {
+          id: 27090,
+          business_id: "bid534ff044360cc",
+          business_name: "Diamond Bank",
+          address1: "79/80, Awolowo Way",
+          lat: "6.6172662",
+          lon: "3.3619424"
+        },
+        {
+          id: 27091,
+          business_id: "bid534ff23a7b6a3",
+          business_name: "Diamond Bank",
+          address1: "Niger Delta University Mini",
+          lat: "4.8677767",
+          lon: "5.8987139"
+        },
+        {
+          id: 27092,
+          business_id: "bid534ff2403346b",
+          business_name: "Diamond Bank",
+          address1: "6, Central Buz District",
+          lat: "4.8677767",
+          lon: "5.8987139"
+        },
+        {
+          id: 27093,
+          business_id: "bid534ff244614a0",
+          business_name: "Diamond Bank",
+          address1: "7, New Bridge Road",
+          lat: "7.730556",
+          lon: "8.536111"
+        },
+        {
+          id: 27094,
+          business_id: "bid534ff40d4aafb",
+          business_name: "Diamond Bank",
+          address1: "University Of Maiduguri",
+          lat: "11.8036963",
+          lon: "13.1999909"
+        },
+        {
+          id: 27095,
+          business_id: "bid534ff41407fd9",
+          business_name: "Diamond Bank",
+          address1: "20, Shehu Laminu Way",
+          lat: "11.832541",
+          lon: "13.1492117"
+        },
+        {
+          id: 27096,
+          business_id: "bid534ff419b54c4",
+          business_name: "Diamond Bank",
+          address1: "1, Udei Street",
+          lat: "7.730556",
+          lon: "8.536111"
+        },
+        {
+          id: 27099,
+          business_id: "bid534ff5a895e24",
+          business_name: "Diamond Bank",
+          address1: "6, Okim Osabo",
+          lat: "5.9616504",
+          lon: "8.7205877"
+        },
+        {
+          id: 27100,
+          business_id: "bid534ff59a615ad",
+          business_name: "Diamond Bank",
+          address1: "7, Mary Slessor Street",
+          lat: "4.9544633",
+          lon: "8.3354143"
+        },
+        {
+          id: 27101,
+          business_id: "bid534ff59505057",
+          business_name: "Diamond Bank",
+          address1: "7, Baga Road",
+          lat: "11.9088717",
+          lon: "13.0638931"
+        },
+        {
+          id: 27179,
+          business_id: "bid53563e97c186e",
+          business_name: "Diamond Bank",
+          address1: "252, Nnebisi Road",
+          lat: "6.2054185",
+          lon: "6.7218572"
+        },
+        {
+          id: 27180,
+          business_id: "bid53563eba84543",
+          business_name: "Diamond Bank",
+          address1: "Warri Refinery And Petroleum Company",
+          lat: "5.516667",
+          lon: "5.75"
+        },
+        {
+          id: 27181,
+          business_id: "bid53563ec16aad8",
+          business_name: "Diamond Bank",
+          address1: "Hospital Road",
+          lat: "6.6529618",
+          lon: "8.7951272"
+        },
+        {
+          id: 27186,
+          business_id: "bid5356432ad5743",
+          business_name: "Diamond Bank",
+          address1: "109, Mission Road",
+          lat: "6.3457185",
+          lon: "5.628994"
+        },
+        {
+          id: 27187,
+          business_id: "bid5356432fb2476",
+          business_name: "Diamond Bank",
+          address1: "146, Secretariat Road",
+          lat: "7.6348013",
+          lon: "5.2010854"
+        },
+        {
+          id: 27188,
+          business_id: "bid5356433913f94",
+          business_name: "Diamond Bank",
+          address1: "49, Olodi Oki",
+          lat: "5.516667",
+          lon: "5.75"
+        },
+        {
+          id: 27189,
+          business_id: "bid5356463acc870",
+          business_name: "Diamond Bank",
+          address1: "181, Old Lagos-Asaba Road",
+          lat: "6.2549277",
+          lon: "6.1903721"
+        },
+        {
+          id: 27190,
+          business_id: "bid5356464cc65ab",
+          business_name: "Diamond Bank",
+          address1: "170, Ugbowo",
+          lat: "6.3678737",
+          lon: "5.6279913"
+        },
+        {
+          id: 27191,
+          business_id: "bid535646504ea2c",
+          business_name: "Diamond Bank",
+          address1: "6, Akpakpava Street",
+          lat: "6.3456528",
+          lon: "5.638164"
+        },
+        {
+          id: 27192,
+          business_id: "bid535648a455d40",
+          business_name: "Diamond Bank",
+          address1: "87, Ifueke/Okwe Uwani",
+          lat: "6.3203695",
+          lon: "7.4083958"
+        },
+        {
+          id: 27193,
+          business_id: "bid535648a87efe9",
+          business_name: "Diamond Bank",
+          address1: "University Of Nigeria",
+          lat: "6.8682536",
+          lon: "7.4093249"
+        },
+        {
+          id: 27194,
+          business_id: "bid535648ac7f144",
+          business_name: "Diamond Bank",
+          address1: "69, Enugu / Oba Road",
+          lat: "6.856667",
+          lon: "7.395833"
+        },
+        {
+          id: 27195,
+          business_id: "bid53564ab42d9b0",
+          business_name: "Diamond Bank",
+          address1: "1, Mission Road",
+          lat: "6.4309573",
+          lon: "7.4803425"
+        },
+        {
+          id: 27196,
+          business_id: "bid53564ab9d4f74",
+          business_name: "Diamond Bank",
+          address1: "18, Presidential Road",
+          lat: "6.4414145",
+          lon: "7.5023149"
+        },
+        {
+          id: 27197,
+          business_id: "bid53564abe6bdf8",
+          business_name: "Diamond Bank",
+          address1: "100, Agbani Road",
+          lat: "6.4171271",
+          lon: "7.4919529"
+        },
+        {
+          id: 27199,
+          business_id: "bid53564de48e2d7",
+          business_name: "Diamond Bank",
+          address1: "Orlu International Market",
+          lat: "5.796389",
+          lon: "7.038889"
+        },
+        {
+          id: 27200,
+          business_id: "bid53564de8c6969",
+          business_name: "Diamond Bank",
+          address1: "6, Waast Avenue",
+          lat: "5.5016416",
+          lon: "7.0389584"
+        },
+        {
+          id: 27201,
+          business_id: "bid53564efe95716",
+          business_name: "Diamond Bank",
+          address1: "89, Douglas Road",
+          lat: "5.4817372",
+          lon: "7.0330806"
+        },
+        {
+          id: 27203,
+          business_id: "bid53564f014474b",
+          business_name: "Diamond Bank",
+          address1: "4, Mcc Road",
+          lat: "5.4900545",
+          lon: "7.0416838"
+        },
+        {
+          id: 27205,
+          business_id: "bid535651ab4b5e0",
+          business_name: "Diamond Bank",
+          address1: "Imo State Secretariat",
+          lat: "5.4741557",
+          lon: "7.0115416"
+        },
+        {
+          id: 27206,
+          business_id: "bid535651b01b1f1",
+          business_name: "Diamond Bank",
+          address1: "Orlu Road",
+          lat: "5.5003934",
+          lon: "7.0250918"
+        },
+        {
+          id: 27208,
+          business_id: "bid535652e53345a",
+          business_name: "Diamond Bank",
+          address1: "Building Materials Market",
+          lat: "5.485",
+          lon: "7.035"
+        },
+        {
+          id: 27209,
+          business_id: "bid535652f33865f",
+          business_name: "Diamond Bank",
+          address1: "Federal University Of Technology",
+          lat: "5.3926911",
+          lon: "6.986264"
+        },
+        {
+          id: 27210,
+          business_id: "bid535653ebf25b4",
+          business_name: "Diamond Bank",
+          address1: "157, Okigwe Road",
+          lat: "5.8189049",
+          lon: "7.3265076"
+        },
+        {
+          id: 27211,
+          business_id: "bid535653f20f8d1",
+          business_name: "Diamond Bank",
+          address1: "Ahiara Junction",
+          lat: "5.5379261",
+          lon: "7.286868"
+        },
+        {
+          id: 27213,
+          business_id: "bid535654f1a0a55",
+          business_name: "Diamond Bank",
+          address1: "102, Ibrahim Taiwo Road",
+          lat: "8.4824557",
+          lon: "4.549804"
+        },
+        {
+          id: 27244,
+          business_id: "bid535794ec0dfcd",
+          business_name: "Diamond Bank",
+          address1: "27, Abubakar Burga Road",
+          lat: "8.8471213",
+          lon: "7.8776023"
+        },
+        {
+          id: 27245,
+          business_id: "bid535794f03c7e7",
+          business_name: "Diamond Bank",
+          address1: "20/21, Doma Road",
+          lat: "8.4927274",
+          lon: "8.5058193"
+        },
+        {
+          id: 27246,
+          business_id: "bid535794f3b1b57",
+          business_name: "Diamond Bank",
+          address1: "1, Opposite Akwanga Police Division",
+          lat: "8.9066616",
+          lon: "8.4074573"
+        },
+        {
+          id: 27255,
+          business_id: "bid53579ab1ed40f",
+          business_name: "Diamond Bank",
+          address1: "130, Ibb Way",
+          lat: "12.9696436",
+          lon: "7.6204694"
+        },
+        {
+          id: 27256,
+          business_id: "bid53579ab27c22c",
+          business_name: "Diamond Bank",
+          address1: "2, Jos Road",
+          lat: "8.50634",
+          lon: "8.5202476"
+        },
+        {
+          id: 27257,
+          business_id: "bid53579abd20445",
+          business_name: "Diamond Bank",
+          address1: "Nassarawa State University",
+          lat: "8.859938",
+          lon: "7.8983545"
+        },
+        {
+          id: 27259,
+          business_id: "bid53579ceab1536",
+          business_name: "Diamond Bank",
+          address1: "614, Sultan Abubakar Road",
+          lat: "12.4645242",
+          lon: "4.210275"
+        },
+        {
+          id: 27261,
+          business_id: "bid5357a4663e2f3",
+          business_name: "Diamond Bank",
+          address1: "Along Kagoro Road",
+          lat: "9.5841976",
+          lon: "8.2944221"
+        },
+        {
+          id: 27262,
+          business_id: "bid5357a46abde24",
+          business_name: "Diamond Bank",
+          address1: "Command And Staff College",
+          lat: "10.823611",
+          lon: "7.569444"
+        },
+        {
+          id: 27263,
+          business_id: "bid5357a47288e3c",
+          business_name: "Diamond Bank",
+          address1: "Kaduna Refinery",
+          lat: "10.4424894",
+          lon: "7.480255"
+        },
+        {
+          id: 27264,
+          business_id: "bid5357a73d46cec",
+          business_name: "Diamond Bank",
+          address1: "Dawanau Market",
+          lat: "12",
+          lon: "8.516667"
+        },
+        {
+          id: 27265,
+          business_id: "bid5357a74293e05",
+          business_name: "Diamond Bank",
+          address1: "31, Kofa Wuka Duya",
+          lat: "12",
+          lon: "8.516667"
+        },
+        {
+          id: 27266,
+          business_id: "bid5357a747ebc8d",
+          business_name: "Diamond Bank",
+          address1: "2, France Road",
+          lat: "12.014282",
+          lon: "8.534613"
+        },
+        {
+          id: 27268,
+          business_id: "bid5357ab0f9c14f",
+          business_name: "Diamond Bank",
+          address1: "118, Paiko Road",
+          lat: "9.5895114",
+          lon: "6.5494426"
+        },
+        {
+          id: 27269,
+          business_id: "bid5357ab13ee984",
+          business_name: "Diamond Bank",
+          address1: "Opposite Ibb Main Market",
+          lat: "9.2003255",
+          lon: "7.1722917"
+        },
+        {
+          id: 27270,
+          business_id: "bid5357ab15f3a04",
+          business_name: "Diamond Bank",
+          address1: "13, Lalubu Road",
+          lat: "7.135668",
+          lon: "3.3362488"
+        },
+        {
+          id: 27287,
+          business_id: "bid5358cb953c2ee",
+          business_name: "Diamond Bank",
+          address1: "Idiroko Road",
+          lat: "6.6401727",
+          lon: "2.7530936"
+        },
+        {
+          id: 27288,
+          business_id: "bid5358cba00e8c9",
+          business_name: "Diamond Bank",
+          address1: "2/9, Ilaro Road",
+          lat: "6.5102282",
+          lon: "3.0926899"
+        },
+        {
+          id: 27289,
+          business_id: "bid5358cbac84d3d",
+          business_name: "Diamond Bank",
+          address1: "38, Abeokuta Expressway",
+          lat: "6.6748811",
+          lon: "3.1980527"
+        },
+        {
+          id: 27290,
+          business_id: "bid5358cbb8409f0",
+          business_name: "Diamond Bank",
+          address1: "145, Akarigbo Street",
+          lat: "6.8237617",
+          lon: "3.6266058"
+        },
+        {
+          id: 27298,
+          business_id: "bid5358d08c3dd3c",
+          business_name: "Diamond Bank",
+          address1: "10, Yaba Road",
+          lat: "7.2371506",
+          lon: "5.1998463"
+        },
+        {
+          id: 27299,
+          business_id: "bid5358d097c0f2f",
+          business_name: "Diamond Bank",
+          address1: "73, Gbongan-Ibadan Road",
+          lat: "7.7601489",
+          lon: "4.5320512"
+        },
+        {
+          id: 27300,
+          business_id: "bid5358d0a6816d4",
+          business_name: "Diamond Bank",
+          address1: "82, Oyemekun Street",
+          lat: "7.2562809",
+          lon: "5.1829554"
+        },
+        {
+          id: 27301,
+          business_id: "bid5358d0b0ae7d1",
+          business_name: "Diamond Bank",
+          address1: "35, Ibadan Road",
+          lat: "7.0169903",
+          lon: "3.914566"
+        },
+        {
+          id: 27304,
+          business_id: "bid5358d5e13f2ee",
+          business_name: "Diamond Bank",
+          address1: "Ring Road",
+          lat: "7.3612412",
+          lon: "3.8678117"
+        },
+        {
+          id: 27305,
+          business_id: "bid5358d631cce96",
+          business_name: "Diamond Bank",
+          address1: "11, Lebanon Street",
+          lat: "7.3874062",
+          lon: "3.8852838"
+        },
+        {
+          id: 27307,
+          business_id: "bid5358d6d04769e",
+          business_name: "Diamond Bank",
+          address1: "53, Iwo Road",
+          lat: "7.4145119",
+          lon: "3.95809"
+        },
+        {
+          id: 27309,
+          business_id: "bid5358d98781600",
+          business_name: "Diamond Bank",
+          address1: "Ui, Secretariat Road",
+          lat: "7.4120687",
+          lon: "3.905924"
+        },
+        {
+          id: 27311,
+          business_id: "bid5358db1f34a8e",
+          business_name: "Diamond Bank",
+          address1: "65, Old Jos Road",
+          lat: "9.9429505",
+          lon: "8.8671064"
+        },
+        {
+          id: 27312,
+          business_id: "bid5358dbd07d473",
+          business_name: "Diamond Bank",
+          address1: "1, Club Road",
+          lat: "9.9093966",
+          lon: "8.888257"
+        },
+        {
+          id: 27313,
+          business_id: "bid5358dcd453f4c",
+          business_name: "Diamond Bank",
+          address1: "34, Ahmadu Bello Way",
+          lat: "9.9202749",
+          lon: "8.8892867"
+        },
+        {
+          id: 27316,
+          business_id: "bid5358e3a829b99",
+          business_name: "Diamond Bank",
+          address1: "Eleme Refinery",
+          lat: "4.7675967",
+          lon: "7.1006639"
+        },
+        {
+          id: 27318,
+          business_id: "bid5358e3e23bc24",
+          business_name: "Diamond Bank",
+          address1: "1, Odual Road",
+          lat: "4.815554",
+          lon: "7.0498442"
+        },
+        {
+          id: 27319,
+          business_id: "bid5358e454505f4",
+          business_name: "Diamond Bank",
+          address1: "Bonny Island",
+          lat: "4.7594437",
+          lon: "7.0239081"
+        },
+        {
+          id: 27320,
+          business_id: "bid5358e4c257330",
+          business_name: "Diamond Bank",
+          address1: "48, Ikwerre Road",
+          lat: "4.793615",
+          lon: "6.9955562"
+        },
+        {
+          id: 27323,
+          business_id: "bid5358e67f370fc",
+          business_name: "Diamond Bank",
+          address1: "11, Location Road",
+          lat: "4.8603469",
+          lon: "7.096411"
+        },
+        {
+          id: 27325,
+          business_id: "bid5358e8795f1c7",
+          business_name: "Diamond Bank",
+          address1: "160, Sani Abacha Way",
+          lat: "12.15",
+          lon: "6.666667"
+        },
+        {
+          id: 38556,
+          business_id: "bid579b6a8708d0b",
+          business_name: "Diamond Bank",
+          address1: "81,Orhoworhun Road",
+          lat: "5.5543995",
+          lon: "5.7932008"
+        }
+      ];
+
+      accessBank = [
+        {
+          id: 3036,
+          business_id: "bid4db8de98b0893",
+          business_name: "Access Bank Plc",
+          address1: "69, Azikiwe Road",
+          lat: "5.1088041",
+          lon: "7.366911"
+        },
+        {
+          id: 3037,
+          business_id: "bid4db8df031d103",
+          business_name: "Access Bank Plc",
+          address1: "6, Trading/Residential Area (Library Avenue)",
+          lat: "5.533333",
+          lon: "7.483333"
+        },
+        {
+          id: 3038,
+          business_id: "bid4db8dfa93ea09",
+          business_name: "Access Bank Plc",
+          address1: "13/15, Atiku Abubakar Road",
+          lat: "9.2607769",
+          lon: "12.4558842"
+        },
+        {
+          id: 3039,
+          business_id: "bid4db8e02e28f39",
+          business_name: "Access Bank Plc",
+          address1: "21/23 Gibbs Street, Uyo",
+          lat: "5.0341871",
+          lon: "7.9341319"
+        },
+        {
+          id: 3040,
+          business_id: "bid4db8e0cf15ba6",
+          business_name: "Access Bank Plc",
+          address1: "1, Ajekwe Close, Off Enugu-Onitsha Express way",
+          lat: "6.206944",
+          lon: "7.067778"
+        },
+        {
+          id: 3041,
+          business_id: "bid4db8e12a7338b",
+          business_name: "Access Bank Plc",
+          address1: "Block 015, Zone 1, Edo-Ezemewi Road",
+          lat: "6.0105192",
+          lon: "6.9103455"
+        },
+        {
+          id: 3042,
+          business_id: "bid4db8e187a53b5",
+          business_name: "Access Bank Plc",
+          address1: "6, New Market Road",
+          lat: "6.1506886",
+          lon: "6.7770785"
+        },
+        {
+          id: 3043,
+          business_id: "bid4db8e1f655e66",
+          business_name: "Access Bank Plc",
+          address1: "24, Murtala Mohammed Way",
+          lat: "10.2976379",
+          lon: "9.8261674"
+        },
+        {
+          id: 3045,
+          business_id: "bid4db8e2f9400b2",
+          business_name: "Access Bank Plc",
+          address1: "5, Ogiri Oko Road, GRA",
+          lat: "7.730556",
+          lon: "8.536111"
+        },
+        {
+          id: 3046,
+          business_id: "bid4db8e3b64f8eb",
+          business_name: "Access Bank Plc",
+          address1: "Sir Kashim Ibrahim Way",
+          lat: "11.8334941",
+          lon: "13.120886"
+        },
+        {
+          id: 3047,
+          business_id: "bid4db8e4884c2e8",
+          business_name: "Access Bank Plc",
+          address1: "45, Muritala Mohammed Way",
+          lat: "4.9592369",
+          lon: "8.3215288"
+        },
+        {
+          id: 3048,
+          business_id: "bid4db8e4eedb86f",
+          business_name: "Access Bank Plc",
+          address1: "Unicem  Mfamosing",
+          lat: "4.95",
+          lon: "8.325"
+        },
+        {
+          id: 3049,
+          business_id: "bid4db8e629eed72",
+          business_name: "Access Bank Plc",
+          address1: "304, Nnebisi, Road",
+          lat: "6.2054185",
+          lon: "6.7218572"
+        },
+        {
+          id: 3050,
+          business_id: "bid4db8e679bfd82",
+          business_name: "Access Bank Plc",
+          address1: "57, Effurun/Sapele Road",
+          lat: "5.5560257",
+          lon: "5.7845079"
+        },
+        {
+          id: 3051,
+          business_id: "bid4db8e7194fd1c",
+          business_name: "Access Bank Plc",
+          address1: "44, Ogoja Road",
+          lat: "6.3341922",
+          lon: "8.0961063"
+        },
+        {
+          id: 3052,
+          business_id: "bid4db8e8fa06dac",
+          business_name: "Access Bank Plc",
+          address1: "45, Akpakpava Street, Benin City",
+          lat: "6.3176",
+          lon: "5.6145"
+        },
+        {
+          id: 3053,
+          business_id: "bid4db8eb415bdfd",
+          business_name: "Access Bank Plc",
+          address1: "164, Opposite NPDC",
+          lat: "6.1920465",
+          lon: "5.6412633"
+        },
+        {
+          id: 3054,
+          business_id: "bid4db8eb9734de9",
+          business_name: "Access Bank Plc",
+          address1: "University of Benin Alumni Association Building",
+          lat: "6.3176",
+          lon: "5.6145"
+        },
+        {
+          id: 3055,
+          business_id: "bid4db8ebde77945",
+          business_name: "Access Bank Plc",
+          address1: "170, Uselu - Lagos Road, Benin City",
+          lat: "6.3176",
+          lon: "5.6145"
+        },
+        {
+          id: 3056,
+          business_id: "bid4db8ec4232969",
+          business_name: "Access Bank Plc",
+          address1: "5, New Iyin Road",
+          lat: "7.64525",
+          lon: "5.1943982"
+        },
+        {
+          id: 3057,
+          business_id: "bid4db8ecaac072b",
+          business_name: "Access Bank Plc",
+          address1: "67, Ogui Road, Enugu",
+          lat: "6.4434783",
+          lon: "7.4968672"
+        },
+        {
+          id: 3058,
+          business_id: "bid4db8ecf4e41e0",
+          business_name: "Access Bank Plc",
+          address1: "University of Nigeria",
+          lat: "6.8682536",
+          lon: "7.4093249"
+        },
+        {
+          id: 3059,
+          business_id: "bid4db8edbcb33e1",
+          business_name: "Access Bank Plc",
+          address1: "Ashakacem Plc Works, Ashaka",
+          lat: "10.8856182",
+          lon: "11.5148604"
+        },
+        {
+          id: 3060,
+          business_id: "bid4db8f768907a1",
+          business_name: "Access Bank Plc",
+          address1: "8, New Market Road, Gombe",
+          lat: "10.283333",
+          lon: "11.166667"
+        },
+        {
+          id: 3061,
+          business_id: "bid4db8f829b5e38",
+          business_name: "Access Bank Plc",
+          address1: "18, Wetheral Road Owerri",
+          lat: "5.4916132",
+          lon: "7.0348921"
+        },
+        {
+          id: 3062,
+          business_id: "bid4db8f8e11fef3",
+          business_name: "Access Bank Plc",
+          address1: "10/11 Sani Abacha Way",
+          lat: "11.701111",
+          lon: "9.341944"
+        },
+        {
+          id: 3063,
+          business_id: "bid4db8f93f127ef",
+          business_name: "Access Bank Plc",
+          address1: "16/20 Bida Road Off Yakubu Gowon Way Kaduna",
+          lat: "10.516667",
+          lon: "7.433333"
+        },
+        {
+          id: 3064,
+          business_id: "bid4db8f9fa54480",
+          business_name: "Access Bank Plc",
+          address1: "12B, Post Office Road Kano",
+          lat: "11.9814895",
+          lon: "8.519634"
+        },
+        {
+          id: 3065,
+          business_id: "bid4db8fa531b65e",
+          business_name: "Access Bank Plc",
+          address1: "22, Ibrahim Babaginda Way, Wambai Kano",
+          lat: "",
+          lon: ""
+        },
+        {
+          id: 3066,
+          business_id: "bid4db904d804bb8",
+          business_name: "Access Bank Plc",
+          address1: "106, IBB Way Katsina State",
+          lat: "12.9696436",
+          lon: "7.6204694"
+        },
+        {
+          id: 3067,
+          business_id: "bid4db905882f50f",
+          business_name: "Access Bank Plc",
+          address1: "1, Jos Road, Birnin Kebbi, Kebbi State.",
+          lat: "12.4587309",
+          lon: "4.2066077"
+        },
+        {
+          id: 3068,
+          business_id: "bid4db9062e04b07",
+          business_name: "Access Bank Plc",
+          address1: "Plot 82, Lokoja Kabba Road",
+          lat: "7.816667",
+          lon: "6.75"
+        },
+        {
+          id: 3069,
+          business_id: "bid4db9069623c4c",
+          business_name: "Access Bank Plc",
+          address1:
+            "Opposite Obajana Cement Plc, KM 22 Along Lokoja Kabba Expressway, Obajana Kogi State",
+          lat: "7.916667",
+          lon: "6.433333"
+        },
+        {
+          id: 3070,
+          business_id: "bid4db90716986b1",
+          business_name: "Access Bank Plc",
+          address1: "Stadium Shopping Complex, Taiwo Road, Ilorin",
+          lat: "8.5",
+          lon: "4.55"
+        },
+        {
+          id: 3072,
+          business_id: "bid4db90840a4957",
+          business_name: "Access Bank Plc",
+          address1: "9, Adeola Odeku Street",
+          lat: "6.4305203",
+          lon: "3.4160957"
+        },
+        {
+          id: 3073,
+          business_id: "bid4db908fa680c5",
+          business_name: "Access Bank Plc",
+          address1: "36, Adetokunbo Ademola Street",
+          lat: "6.4311088",
+          lon: "3.424674"
+        },
+        {
+          id: 3074,
+          business_id: "bid4db909758d23b",
+          business_name: "Access Bank Plc",
+          address1: "1, Idowu Taylor Street",
+          lat: "6.4330589",
+          lon: "3.4250953"
+        },
+        {
+          id: 3075,
+          business_id: "bid4db90a0c3ddce",
+          business_name: "Access Bank Plc",
+          address1: "1-3, Enitan Street",
+          lat: "6.4962137",
+          lon: "3.3410897"
+        },
+        {
+          id: 3076,
+          business_id: "bid4db90af3d3ca4",
+          business_name: "Access Bank Plc",
+          address1: "92, Allen Avenue",
+          lat: "6.6050253",
+          lon: "3.3502616"
+        },
+        {
+          id: 3077,
+          business_id: "bid4db90b8256358",
+          business_name: "Access Bank Plc",
+          address1:
+            "Zone B, R4, Mercy Cafe, Aspamda Plaza, Trade Fair Complex, Lagos",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 3078,
+          business_id: "bid4db90bfcc31b2",
+          business_name: "Access Bank Plc",
+          address1: "58, Awolowo Road",
+          lat: "6.4444644",
+          lon: "3.4241109"
+        },
+        {
+          id: 3079,
+          business_id: "bid4db90db5b1e43",
+          business_name: "Access Bank Plc",
+          address1: "115/117 Broad Street, Lagos",
+          lat: "6.4561759",
+          lon: "3.3824763"
+        },
+        {
+          id: 3080,
+          business_id: "bid4db90e0f26cab",
+          business_name: "Access Bank Plc",
+          address1: "8/10 Commercial Road, Opposite Eleganza Plaza Apapa Lagos",
+          lat: "6.440372",
+          lon: "3.3720873"
+        },
+        {
+          id: 3081,
+          business_id: "bid4db90e5cd0758",
+          business_name: "Access Bank",
+          address1: "24A, Creek Road",
+          lat: "6.435671",
+          lon: "3.3657206"
+        },
+        {
+          id: 3084,
+          business_id: "bid4db90fdb4fbfe",
+          business_name: "Access Bank Plc",
+          address1: "3, Apapa Oshodi-Express way",
+          lat: "6.4681377",
+          lon: "3.3224201"
+        },
+        {
+          id: 3085,
+          business_id: "bid4db9105e87575",
+          business_name: "Access Bank Plc",
+          address1:
+            "College of Medicine, University of Lagos, Ishaga Road, Idi-Araba Bus Stop Mushin, Lagos",
+          lat: "6.5355563",
+          lon: "3.3593037"
+        },
+        {
+          id: 3086,
+          business_id: "bid4db910d093584",
+          business_name: "Access Bank",
+          address1: "122, Nnamdi Azikiwe Street",
+          lat: "6.4537186",
+          lon: "3.389654"
+        },
+        {
+          id: 3087,
+          business_id: "bid4db9113eaf057",
+          business_name: "Access Bank Plc",
+          address1: "7,Ayangburen Road,Ikorodu",
+          lat: "6.6198972",
+          lon: "3.503553"
+        },
+        {
+          id: 3088,
+          business_id: "bid4db911b6538f1",
+          business_name: "Access Bank Plc",
+          address1: "Block H41 - 43 & H76 - 78, Ikota Shopping Complex",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 3089,
+          business_id: "bid4db91bc059439",
+          business_name: "Access Bank Plc",
+          address1: "25A, Ilupeju By-pass, Ilupeju",
+          lat: "6.5644877",
+          lon: "3.356525"
+        },
+        {
+          id: 3090,
+          business_id: "bid4db91c482826e",
+          business_name: "Access Bank Plc",
+          address1: "157, Abeokuta Express Way, Iyana-Ipaja",
+          lat: "6.6188603",
+          lon: "3.3004067"
+        },
+        {
+          id: 3092,
+          business_id: "bid4db91fabacaf8",
+          business_name: "Access Bank Plc",
+          address1: "15, Ligali Ayorinde Street",
+          lat: "6.4348203",
+          lon: "3.4404829"
+        },
+        {
+          id: 3093,
+          business_id: "bid4db9203959e2b",
+          business_name: "Access Bank Plc",
+          address1: "6, Mobolaji Bank Anthony Way, Maryland Lagos",
+          lat: "6.5720262",
+          lon: "3.3665111"
+        },
+        {
+          id: 3094,
+          business_id: "bid4db920c0476b3",
+          business_name: "Access Bank Plc",
+          address1: "40A/B Ogba Ijaiye Road Ogba Lagos",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 3095,
+          business_id: "bid4db9212aa7e21",
+          business_name: "Access Bank Plc",
+          address1: "150, Ogunlana Drive",
+          lat: "6.50389",
+          lon: "3.3514423"
+        },
+        {
+          id: 3096,
+          business_id: "bid4db921832f22c",
+          business_name: "Access Bank Plc",
+          address1: "153, Old Ojo Road Kuje Amuwo",
+          lat: "6.4619141",
+          lon: "3.1578875"
+        },
+        {
+          id: 3097,
+          business_id: "bid4db921ed9e679",
+          business_name: "Access Bank Plc",
+          address1: "18 Isolo way",
+          lat: "6.530047",
+          lon: "3.331975"
+        },
+        {
+          id: 3098,
+          business_id: "bid4db9227810575",
+          business_name: "Access Bank Plc",
+          address1: "56, Palm Avenue, Mushin",
+          lat: "6.5345059",
+          lon: "3.3471031"
+        },
+        {
+          id: 3100,
+          business_id: "bid4db92332d648a",
+          business_name: "Access Bank Plc",
+          address1: "1,Kirikiri Lighter Terminal",
+          lat: "6.45",
+          lon: "3.366667"
+        },
+        {
+          id: 3102,
+          business_id: "bid4db923f923811",
+          business_name: "Access Bank Plc",
+          address1: "Plot 1665, Oyin Jolayemi Street Victoria Island Lagos",
+          lat: "6.4280556",
+          lon: "3.4219444"
+        },
+        {
+          id: 3104,
+          business_id: "bid4db9251f9c3c6",
+          business_name: "Access Bank Plc",
+          address1: "30, King George V Road, Onikan, Lagos Island",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 3105,
+          business_id: "bid4db9257d1de58",
+          business_name: "Access Bank Plc",
+          address1: "Shop A65 Alaba International Market",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 3109,
+          business_id: "bid4db9277a45a4e",
+          business_name: "Access Bank Plc",
+          address1: "1617A Idejo/Danmole Victoria Island",
+          lat: "6.4280556",
+          lon: "3.4219444"
+        },
+        {
+          id: 3110,
+          business_id: "bid4db92802e0aaa",
+          business_name: "Access Bank Plc",
+          address1: "32, Jos Road",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 3111,
+          business_id: "YmlkNGRiOTI4MDJlMGFhYQ==",
+          business_name: "Access Bank Plc",
+          address1: "32, Jos Road, Lafia",
+          lat: "8.491667",
+          lon: "8.516667"
+        },
+        {
+          id: 3112,
+          business_id: "bid4db928e578fbc",
+          business_name: "Access Bank Plc",
+          address1: "1, David Mark Road, Off Paiko Road, Minna Niger State",
+          lat: "9.613889",
+          lon: "6.556944"
+        },
+        {
+          id: 3116,
+          business_id: "bid4db926c802e93",
+          business_name: "Access Bank Plc",
+          address1: "1B, Point Road",
+          lat: "6.4485358",
+          lon: "3.3673811"
+        },
+        {
+          id: 3118,
+          business_id: "bid4db925da51262",
+          business_name: "Access Bank",
+          address1: "16, Apongbon street",
+          lat: "6.4612962",
+          lon: "3.381992"
+        },
+        {
+          id: 3119,
+          business_id: "bid4db9263bbb025",
+          business_name: "Access Bank",
+          address1: "23B Broad Street",
+          lat: "6.4535199",
+          lon: "3.3895406"
+        },
+        {
+          id: 3121,
+          business_id: "bid4db929ece4e6f",
+          business_name: "Access Bank",
+          address1: "NNPC/PPMC Depot",
+          lat: "9.2003255",
+          lon: "7.1722917"
+        },
+        {
+          id: 3122,
+          business_id: "bid4db924ab73a16",
+          business_name: "Access Bank Plc",
+          address1: "4, Burma Road",
+          lat: "6.4406117",
+          lon: "3.3752434"
+        },
+        {
+          id: 3123,
+          business_id: "bid4db923a0b6fed",
+          business_name: "Access Bank Plc",
+          address1: "Trade Fair Complex, Badagry Express Way",
+          lat: "6.4990976",
+          lon: "3.0914068"
+        },
+        {
+          id: 3124,
+          business_id: "bid4db922e8be4a5",
+          business_name: "Access Bank Plc",
+          address1: "20 Simbiat Abiola Way",
+          lat: "6.5933553",
+          lon: "3.3385947"
+        },
+        {
+          id: 3125,
+          business_id: "YmlkNGRiOTI5ZWNlNGU2Zg==",
+          business_name: "Access Bank",
+          address1: "NNPC/PPMC Depot",
+          lat: "9.2003255",
+          lon: "7.1722917"
+        },
+        {
+          id: 3126,
+          business_id: "YmlkNGRiOTI4ZTU3OGZiYw==",
+          business_name: "Access Bank",
+          address1: "1, David Mark Road, Off Paiko Road",
+          lat: "9.5895114",
+          lon: "6.5494426"
+        },
+        {
+          id: 3127,
+          business_id: "bid4db949ef58f97",
+          business_name: "Access Bank",
+          address1: "No 14,Lalubu Street,Oke-Ilewo",
+          lat: "7.135668",
+          lon: "3.3362488"
+        },
+        {
+          id: 3128,
+          business_id: "bid4db94a71ee3ab",
+          business_name: "Access Bank",
+          address1: "Plot C 2A/4 Ilaro Road, Agbara Industrial Estate",
+          lat: "6.5102282",
+          lon: "3.0926899"
+        },
+        {
+          id: 3129,
+          business_id: "bid4db94af337f63",
+          business_name: "Access Bank",
+          address1: "17, Oyemekun Road",
+          lat: "7.2562809",
+          lon: "5.1829554"
+        },
+        {
+          id: 3131,
+          business_id: "bid4db94be9263aa",
+          business_name: "Access Bank",
+          address1: "Plot 2, Aiyedun Layout  Gbogan Road",
+          lat: "7.766667",
+          lon: "4.566667"
+        },
+        {
+          id: 3132,
+          business_id: "bid4db94fce831ec",
+          business_name: "Access Bank",
+          address1: "Plot 32, Bodija/University of Ibadan Road",
+          lat: "7.5368859",
+          lon: "3.9016011"
+        },
+        {
+          id: 3133,
+          business_id: "bid4db950300555b",
+          business_name: "Access Bank",
+          address1: "Plot 1, Old Dugbe Market Scheme",
+          lat: "7.396389",
+          lon: "3.916667"
+        },
+        {
+          id: 3134,
+          business_id: "bid4db95078c73c7",
+          business_name: "Access Bank",
+          address1: "37, Iwo Road",
+          lat: "7.4145119",
+          lon: "3.95809"
+        },
+        {
+          id: 3135,
+          business_id: "bid4db9512b15777",
+          business_name: "Access Bank",
+          address1: "28A, Rwang Pam Street",
+          lat: "9.9221915",
+          lon: "8.8886386"
+        },
+        {
+          id: 3136,
+          business_id: "bid4db952975f295",
+          business_name: "Access Bank",
+          address1: "1, Agip Road Mile 4",
+          lat: "4.8115036",
+          lon: "6.9807924"
+        },
+        {
+          id: 3137,
+          business_id: "bid4db95309b771e",
+          business_name: "Access Bank",
+          address1: "12 Azikwe Road",
+          lat: "4.7747883",
+          lon: "7.0126471"
+        },
+        {
+          id: 3138,
+          business_id: "bid4db95353c84ba",
+          business_name: "Access Bank",
+          address1: "10A Bank Road, Opposite R/S Judiciary",
+          lat: "4.815554",
+          lon: "7.0498442"
+        },
+        {
+          id: 3139,
+          business_id: "bid4db9544bd37b0",
+          business_name: "Access Bank",
+          address1: "64, Hospital Road",
+          lat: "4.4358571",
+          lon: "7.173745"
+        },
+        {
+          id: 3140,
+          business_id: "bid4db954ad7bc58",
+          business_name: "Access Bank",
+          address1: "Plot 329, Olu Obasanjo Road",
+          lat: "4.8144101",
+          lon: "7.004233"
+        },
+        {
+          id: 3141,
+          business_id: "bid4db954f900069",
+          business_name: "Access Bank",
+          address1: "679, Ikwerre Road",
+          lat: "4.853289",
+          lon: "6.9920548"
+        },
+        {
+          id: 3143,
+          business_id: "bid4db955e3eeb87",
+          business_name: "Access Bank",
+          address1: "27, Kano Road",
+          lat: "13.066667",
+          lon: "5.233333"
+        },
+        {
+          id: 3144,
+          business_id: "bid4db9563ab107e",
+          business_name: "Access Bank",
+          address1: "57B, Hammanruwa way",
+          lat: "8.9",
+          lon: "11.366667"
+        },
+        {
+          id: 3145,
+          business_id: "bid4db956b14e3a3",
+          business_name: "Access Bank",
+          address1: "Plot 21, Yakubu Gowon Way",
+          lat: "12.15",
+          lon: "6.666667"
+        },
+        {
+          id: 3146,
+          business_id: "bid4db95750d883e",
+          business_name: "Access Bank",
+          address1: "833, Ademola Adetokunbo Crescent",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 3147,
+          business_id: "YmlkNGRiOTU3NTBkODgzZQ==",
+          business_name: "Access Bank",
+          address1: "833, Ademola Adetokunbo Crescent",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 3148,
+          business_id: "bid4db9583c75995",
+          business_name: "Access Bank",
+          address1: "1195, Aminu Kano Cresent",
+          lat: "9.075894",
+          lon: "7.463756"
+        },
+        {
+          id: 3149,
+          business_id: "bid4db9588706c79",
+          business_name: "Access Bank",
+          address1: "48, Yakubu Gowon Crescent",
+          lat: "9.0483551",
+          lon: "7.5268103"
+        },
+        {
+          id: 3150,
+          business_id: "bid4db9593616522",
+          business_name: "Access Bank",
+          address1: "Plot 1231, Cadastral Zone A03",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 3151,
+          business_id: "bid4db9597c7815d",
+          business_name: "Access Bank",
+          address1: "59, Gado Nasko Road",
+          lat: "9.1495277",
+          lon: "7.327789"
+        },
+        {
+          id: 3152,
+          business_id: "bid4db959bd2b9e2",
+          business_name: "Access Bank",
+          address1: "National Assembly White House Basement",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 3153,
+          business_id: "bid4db95a380589e",
+          business_name: "Access Bank",
+          address1: "36, Doula Street",
+          lat: "9.0268172",
+          lon: "7.5821147"
+        },
+        {
+          id: 3155,
+          business_id: "YmlkNGRiOTI3N2E0NWE0ZQ==",
+          business_name: "Access Bank",
+          address1: "1617A Idejo/Danmole Victoria Island",
+          lat: "6.4280556",
+          lon: "3.4219444"
+        },
+        {
+          id: 3156,
+          business_id: "YmlkNGRiOTI2YzgwMmU5Mw==",
+          business_name: "Access Bank",
+          address1: "1B, Point Road",
+          lat: "6.4485358",
+          lon: "3.3673811"
+        },
+        {
+          id: 3157,
+          business_id: "YmlkNGRiOTI1N2QxZGU1OA==",
+          business_name: "Access Bank",
+          address1: "Shop A65 Alaba International Market",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 3158,
+          business_id: "YmlkNGRiOTI1MWY5YzNjNg==",
+          business_name: "Access Bank",
+          address1: "30, King George V Road",
+          lat: "6.4464008",
+          lon: "3.4056653"
+        },
+        {
+          id: 3159,
+          business_id: "YmlkNGRiOTI0YWI3M2ExNg==",
+          business_name: "Access Bank",
+          address1: "4, Burma Road",
+          lat: "6.4406117",
+          lon: "3.3752434"
+        },
+        {
+          id: 3160,
+          business_id: "YmlkNGRiOTIzZjkyMzgxMQ==",
+          business_name: "Access Bank",
+          address1: "Plot 1665, Oyin Jolayemi Street",
+          lat: "6.4294602",
+          lon: "3.4297749"
+        },
+        {
+          id: 3161,
+          business_id: "YmlkNGRiOTIzYTBiNmZlZA==",
+          business_name: "Access Bank",
+          address1: "Trade Fair Complex, Badagry Express Way",
+          lat: "6.4990976",
+          lon: "3.0914068"
+        },
+        {
+          id: 3162,
+          business_id: "YmlkNGRiOTIzMzJkNjQ4YQ==",
+          business_name: "Access Bank",
+          address1: "1,Kirikiri Lighter Terminal",
+          lat: "6.45",
+          lon: "3.366667"
+        },
+        {
+          id: 3163,
+          business_id: "YmlkNGRiOTIyZThiZTRhNQ==",
+          business_name: "Access Bank",
+          address1: "20 Simbiat Abiola Way",
+          lat: "6.5933553",
+          lon: "3.3385947"
+        },
+        {
+          id: 3164,
+          business_id: "YmlkNGRiOTIyNzgxMDU3NQ==",
+          business_name: "Access Bank",
+          address1: "56, Palm Avenue",
+          lat: "6.5347618",
+          lon: "3.3470276"
+        },
+        {
+          id: 3165,
+          business_id: "YmlkNGRiOTIxZWQ5ZTY3OQ==",
+          business_name: "Access Bank",
+          address1: "18 Osoloway, off Intl Airport Road",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 3166,
+          business_id: "YmlkNGRiOTIxODMyZjIyYw==",
+          business_name: "Access Bank",
+          address1: "153, Old Ojo Road Kuje Amuwo",
+          lat: "6.4587866",
+          lon: "3.298648"
+        },
+        {
+          id: 3167,
+          business_id: "YmlkNGRiOTIxMmFhN2UyMQ==",
+          business_name: "Access Bank",
+          address1: "150, Ogunlana Drive",
+          lat: "6.50389",
+          lon: "3.3514423"
+        },
+        {
+          id: 3168,
+          business_id: "YmlkNGRiOTIwYzA0NzZiMw==",
+          business_name: "Access Bank",
+          address1: "40A/B Ogba Ijaiye Road",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 3169,
+          business_id: "YmlkNGRiOTIwMzk1OWUyYg==",
+          business_name: "Access Bank",
+          address1: "6, Mobolaji Bank Anthony Way",
+          lat: "6.5720262",
+          lon: "3.3665111"
+        },
+        {
+          id: 3170,
+          business_id: "YmlkNGRiOTFmYWJhY2FmOA==",
+          business_name: "Access Bank",
+          address1: "15, Ligali Ayorinde Street",
+          lat: "6.4348203",
+          lon: "3.4404829"
+        },
+        {
+          id: 3171,
+          business_id: "YmlkNGRiOTFmNGE3YmVmYQ==",
+          business_name: "Access Bank",
+          address1: "Along Lekki-Epe Expressway",
+          lat: "6.4312239",
+          lon: "3.4690509"
+        },
+        {
+          id: 3172,
+          business_id: "YmlkNGRiOTFjNDgyODI2ZQ==",
+          business_name: "Access Bank",
+          address1: "157, Abeokuta Express Way, Iyana-Ipaja",
+          lat: "6.6188603",
+          lon: "3.3004067"
+        },
+        {
+          id: 3173,
+          business_id: "YmlkNGRiOTFiYzA1OTQzOQ==",
+          business_name: "Access Bank",
+          address1: "25A, Ilupeju By-pass, Ilupeju",
+          lat: "6.5644877",
+          lon: "3.356525"
+        },
+        {
+          id: 3174,
+          business_id: "YmlkNGRiOTExYjY1MzhmMQ==",
+          business_name: "Access Bank",
+          address1: "Block H41 - 43 and H76 - 78, Ikota Shopping Complex",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 3175,
+          business_id: "YmlkNGRiOTExM2VhZjA1Nw==",
+          business_name: "Access Bank",
+          address1: "7,Ayangburen Road",
+          lat: "6.6196358",
+          lon: "3.5034317"
+        },
+        {
+          id: 3176,
+          business_id: "YmlkNGRiOTEwZDA5MzU4NA==",
+          business_name: "Access Bank",
+          address1: "122, Nnamdi Azikiwe Street",
+          lat: "6.4537186",
+          lon: "3.389654"
+        },
+        {
+          id: 3177,
+          business_id: "YmlkNGRiOTEwNWU4NzU3NQ==",
+          business_name: "Access Bank",
+          address1: "College of Medicine, University of Lagos, Ishaga Road",
+          lat: "6.5167018",
+          lon: "3.3539504"
+        },
+        {
+          id: 3178,
+          business_id: "YmlkNGRiOTBmZGI0ZmJmZQ==",
+          business_name: "Access Bank",
+          address1: "3, Apapa Oshodi-Express way",
+          lat: "6.4681377",
+          lon: "3.3224201"
+        },
+        {
+          id: 3179,
+          business_id: "YmlkNGRiOTBmMjdkN2FkOQ==",
+          business_name: "Access Bank",
+          address1: "Plot 650A , 32 Road 3rd Avenue",
+          lat: "6.46925",
+          lon: "3.288621"
+        },
+        {
+          id: 3180,
+          business_id: "YmlkNGRiOTBlYzE1NTQ2NQ==",
+          business_name: "Access Bank",
+          address1: "24A Creek Road",
+          lat: "6.435671",
+          lon: "3.3657206"
+        },
+        {
+          id: 3181,
+          business_id: "YmlkNGRiOTBlNWNkMDc1OA==",
+          business_name: "Access Bank",
+          address1: "24A Creek Road",
+          lat: "6.435671",
+          lon: "3.3657206"
+        },
+        {
+          id: 3182,
+          business_id: "YmlkNGRiOTBlMGYyNmNhYg==",
+          business_name: "Access Bank",
+          address1: "8/10 Commercial Road",
+          lat: "6.4403768",
+          lon: "3.3721051"
+        },
+        {
+          id: 3183,
+          business_id: "YmlkNGRiOTBkYjViMWU0Mw==",
+          business_name: "Access Bank",
+          address1: "115/117 Broad Street",
+          lat: "6.4561759",
+          lon: "3.3824763"
+        },
+        {
+          id: 3184,
+          business_id: "YmlkNGRiOTBiZmNjMzFiMg==",
+          business_name: "Access Bank",
+          address1: "58, Awolowo Road",
+          lat: "6.4444644",
+          lon: "3.4241109"
+        },
+        {
+          id: 3185,
+          business_id: "YmlkNGRiOTBiODI1NjM1OA==",
+          business_name: "Access Bank",
+          address1: "Zone B, R4, Mercy Cafe, Aspamda Plaza, Trade Fair Complex",
+          lat: "6.4619141",
+          lon: "3.1578875"
+        },
+        {
+          id: 3186,
+          business_id: "YmlkNGRiOTBhZjNkM2NhNA==",
+          business_name: "Access Bank",
+          address1: "92, Allen Avenue",
+          lat: "6.6058235",
+          lon: "3.3498452"
+        },
+        {
+          id: 3187,
+          business_id: "YmlkNGRiOTBhMGMzZGRjZQ==",
+          business_name: "Access Bank",
+          address1: "1-3 Enitan Street",
+          lat: "6.4962137",
+          lon: "3.3410897"
+        },
+        {
+          id: 3188,
+          business_id: "YmlkNGRiOTA5NzU4ZDIzYg==",
+          business_name: "Access Bank",
+          address1: "1,Idowu Taylor Street",
+          lat: "6.4330589",
+          lon: "3.4250953"
+        },
+        {
+          id: 3189,
+          business_id: "YmlkNGRiOTA4ZmE2ODBjNQ==",
+          business_name: "Access Bank",
+          address1: "36, Adetokunbo Ademola Street",
+          lat: "6.4311088",
+          lon: "3.424674"
+        },
+        {
+          id: 3190,
+          business_id: "YmlkNGRiOTA4NDBhNDk1Nw==",
+          business_name: "Access Bank",
+          address1: "9, Adeola Odeku Street",
+          lat: "6.4305203",
+          lon: "3.4160957"
+        },
+        {
+          id: 3191,
+          business_id: "YmlkNGRiOTA3Y2M3NDFjOQ==",
+          business_name: "Access Bank",
+          address1: "53 Adeniyi Jones Avenue",
+          lat: "6.6173149",
+          lon: "3.3459717"
+        },
+        {
+          id: 3192,
+          business_id: "YmlkNGRiOTA3MTY5ODZiMQ==",
+          business_name: "Access Bank",
+          address1: "Stadium Shopping Complex, Taiwo Road",
+          lat: "8.4824557",
+          lon: "4.549804"
+        },
+        {
+          id: 3193,
+          business_id: "YmlkNGRiOTA2OTYyM2M0Yw==",
+          business_name: "Access Bank",
+          address1: "Opposite Obajana Cement Plc",
+          lat: "7.916667",
+          lon: "6.433333"
+        },
+        {
+          id: 3194,
+          business_id: "YmlkNGRiOTA2MmUwNGIwNw==",
+          business_name: "Access Bank",
+          address1: "Plot 82, Lokoja Kabba Road",
+          lat: "7.816667",
+          lon: "6.75"
+        },
+        {
+          id: 3195,
+          business_id: "YmlkNGRiOTA1ODgyZjUwZg==",
+          business_name: "Access Bank",
+          address1: "1, Jos Road",
+          lat: "12.4587309",
+          lon: "4.2066077"
+        },
+        {
+          id: 3196,
+          business_id: "YmlkNGRiOTA0ZDgwNGJiOA==",
+          business_name: "Access Bank",
+          address1: "106, IBB Way",
+          lat: "12.9696436",
+          lon: "7.6204694"
+        },
+        {
+          id: 3197,
+          business_id: "YmlkNGRiOGZhNTMxYjY1ZQ==",
+          business_name: "Access Bank",
+          address1: "22, Ibrahim Babaginda Way",
+          lat: "12.0043783",
+          lon: "8.516551"
+        },
+        {
+          id: 3198,
+          business_id: "YmlkNGRiOGY5ZmE1NDQ4MA==",
+          business_name: "Access Bank",
+          address1: "12B, Post Office Road",
+          lat: "11.9814895",
+          lon: "8.519634"
+        },
+        {
+          id: 3199,
+          business_id: "YmlkNGRiOGY5M2YxMjdlZg==",
+          business_name: "Access Bank",
+          address1: "16/20 Bida Road",
+          lat: "10.5225016",
+          lon: "7.4342885"
+        },
+        {
+          id: 3200,
+          business_id: "YmlkNGRiOGY4ZTExZmVmMw==",
+          business_name: "Access Bank",
+          address1: "10/11 Sani Abacha Way",
+          lat: "11.701111",
+          lon: "9.341944"
+        },
+        {
+          id: 3201,
+          business_id: "YmlkNGRiOGY4MjliNWUzOA==",
+          business_name: "Access Bank",
+          address1: "18, Wetheral Road",
+          lat: "5.4916132",
+          lon: "7.0348921"
+        },
+        {
+          id: 3202,
+          business_id: "YmlkNGRiOGY3Njg5MDdhMQ==",
+          business_name: "Access Bank",
+          address1: "8, New Market Road",
+          lat: "10.283333",
+          lon: "11.166667"
+        },
+        {
+          id: 3203,
+          business_id: "YmlkNGRiOGVkYmNiMzNlMQ==",
+          business_name: "Access Bank",
+          address1: "Ashakacem Plc Works",
+          lat: "10.8856182",
+          lon: "11.5148604"
+        },
+        {
+          id: 3204,
+          business_id: "YmlkNGRiOGVjZjRlNDFlMA==",
+          business_name: "Access Bank",
+          address1: "University of Nigeria, Enugu Campus",
+          lat: "6.425901",
+          lon: "7.5071271"
+        },
+        {
+          id: 3205,
+          business_id: "YmlkNGRiOGVjYWFjMDcyYg==",
+          business_name: "Access Bank",
+          address1: "67, Ogui Road",
+          lat: "6.4434783",
+          lon: "7.4968672"
+        },
+        {
+          id: 3206,
+          business_id: "YmlkNGRiOGVjNDIzMjk2OQ==",
+          business_name: "Access Bank",
+          address1: "5, New Iyin Road",
+          lat: "7.6471746",
+          lon: "5.1934223"
+        },
+        {
+          id: 3207,
+          business_id: "YmlkNGRiOGViZGU3Nzk0NQ==",
+          business_name: "Access Bank",
+          address1: "170, Uselu - Lagos Road",
+          lat: "6.3937164",
+          lon: "5.6091379"
+        },
+        {
+          id: 3208,
+          business_id: "YmlkNGRiOGViOTczNGRlOQ==",
+          business_name: "Access Bank",
+          address1: "University of Benin Alumni Association Building",
+          lat: "6.3176",
+          lon: "5.6145"
+        },
+        {
+          id: 3209,
+          business_id: "YmlkNGRiOGViNDE1YmRmZA==",
+          business_name: "Access Bank",
+          address1: "164, Opposite NPDC",
+          lat: "5.8750769",
+          lon: "5.6931356"
+        },
+        {
+          id: 3210,
+          business_id: "YmlkNGRiOGU4ZmEwNmRhYw==",
+          business_name: "Access Bank",
+          address1: "45, Akpakpava Street",
+          lat: "6.3456528",
+          lon: "5.638164"
+        },
+        {
+          id: 3211,
+          business_id: "YmlkNGRiOGU3MTk0ZmQxYw==",
+          business_name: "Access Bank",
+          address1: "44, Ogoja Road",
+          lat: "6.3341922",
+          lon: "8.0961063"
+        },
+        {
+          id: 3212,
+          business_id: "YmlkNGRiOGU2NzliZmQ4Mg==",
+          business_name: "Access Bank",
+          address1: "57, Effurun/Sapele Road",
+          lat: "5.5560257",
+          lon: "5.7845079"
+        },
+        {
+          id: 3213,
+          business_id: "YmlkNGRiOGU2MjllZWQ3Mg==",
+          business_name: "Access Bank",
+          address1: "304, Nnebisi, Road",
+          lat: "6.2054185",
+          lon: "6.7218572"
+        },
+        {
+          id: 3214,
+          business_id: "YmlkNGRiOGU0ZWVkYjg2Zg==",
+          business_name: "Access Bank",
+          address1: "Unicem  Mfamosing",
+          lat: "4.95",
+          lon: "8.325"
+        },
+        {
+          id: 3215,
+          business_id: "YmlkNGRiOGU0ODg0YzJlOA==",
+          business_name: "Access Bank",
+          address1: "45, Muritala Mohammed Way",
+          lat: "4.9592369",
+          lon: "8.3215288"
+        },
+        {
+          id: 3216,
+          business_id: "YmlkNGRiOGUzYjY0ZjhlYg==",
+          business_name: "Access Bank",
+          address1: "Sir Kashim Ibrahim Way",
+          lat: "11.8334941",
+          lon: "13.120886"
+        },
+        {
+          id: 3217,
+          business_id: "YmlkNGRiOGUyZjk0MDBiMg==",
+          business_name: "Access Bank",
+          address1: "5, Ogiri Oko Road, GRA",
+          lat: "7.730556",
+          lon: "8.536111"
+        },
+        {
+          id: 3218,
+          business_id: "YmlkNGRiOGUyNzZjMzUwOQ==",
+          business_name: "Access Bank",
+          address1: "Plot 3, Onopa Commercial Layout",
+          lat: "4.9211621",
+          lon: "6.2747734"
+        },
+        {
+          id: 3219,
+          business_id: "YmlkNGRiOGUxZjY1NWU2Ng==",
+          business_name: "Access Bank",
+          address1: "24, Murtala Mohammed Way",
+          lat: "10.2976379",
+          lon: "9.8261674"
+        },
+        {
+          id: 3220,
+          business_id: "YmlkNGRiOGUxODdhNTNiNQ==",
+          business_name: "Access Bank",
+          address1: "6, New Market Road",
+          lat: "6.1506886",
+          lon: "6.7770785"
+        },
+        {
+          id: 3221,
+          business_id: "YmlkNGRiOGUxMmE3MzM4Yg==",
+          business_name: "Access Bank",
+          address1: "Block 015, Zone 1, Edo-Ezemewi Road",
+          lat: "6.0105192",
+          lon: "6.9103455"
+        },
+        {
+          id: 3222,
+          business_id: "YmlkNGRiOGUwY2YxNWJhNg==",
+          business_name: "Access Bank",
+          address1: "1, Ajekwe Close, Off Enugu-Onitsha Express way",
+          lat: "6.206944",
+          lon: "7.067778"
+        },
+        {
+          id: 3223,
+          business_id: "YmlkNGRiOGUwMmUyOGYzOQ==",
+          business_name: "Access Bank",
+          address1: "21/23 Gibbs Street, Uyo",
+          lat: "5.0341871",
+          lon: "7.9341319"
+        },
+        {
+          id: 3224,
+          business_id: "YmlkNGRiOGRmYTkzZWEwOQ==",
+          business_name: "Access Bank",
+          address1: "13/15, Atiku Abubakar Road",
+          lat: "9.2607769",
+          lon: "12.4558842"
+        },
+        {
+          id: 3225,
+          business_id: "YmlkNGRiOGRmMDMxZDEwMw==",
+          business_name: "Access Bank",
+          address1: "6, Trading/Residential Area (Library Avenue)",
+          lat: "5.533333",
+          lon: "7.483333"
+        },
+        {
+          id: 3226,
+          business_id: "YmlkNGRiOGRlOThiMDg5Mw==",
+          business_name: "Access Bank",
+          address1: "69, Azikiwe Road",
+          lat: "5.1088041",
+          lon: "7.366911"
+        },
+        {
+          id: 3228,
+          business_id: "bid4db95549efb6e",
+          business_name: "Access Bank",
+          address1: "466/467, Trans Amadi Industrial Layout",
+          lat: "4.794556",
+          lon: "7.0194371"
+        },
+        {
+          id: 3276,
+          business_id: "bid4db95a91be49c",
+          business_name: "Access Bank",
+          address1: "Plot 247, Herbert Macaulay Way",
+          lat: "9.0636025",
+          lon: "7.4767531"
+        },
+        {
+          id: 6305,
+          business_id: "bid4e12b9ace4af4",
+          business_name: "Access Bank",
+          address1: "2401 Cadastral Zone A7",
+          lat: "9.0908699",
+          lon: "7.4336811"
+        },
+        {
+          id: 6322,
+          business_id: "bid4e12d6777e8cf",
+          business_name: "Access Bank",
+          address1: "Federal Mortage Bank Building",
+          lat: "9.066667",
+          lon: "7.483333"
+        },
+        {
+          id: 6382,
+          business_id: "bid4e140a4437039",
+          business_name: "Access Bank",
+          address1: "92 Lagos/Abeokuta Expressway",
+          lat: "6.5243793",
+          lon: "3.3792057"
+        },
+        {
+          id: 6401,
+          business_id: "bid4e141a8eeaf5b",
+          business_name: "Access Bank",
+          address1: "34, Moloney Street",
+          lat: "6.4485703",
+          lon: "3.4065197"
+        },
+        {
+          id: 6536,
+          business_id: "bid4e16a8a2813b1",
+          business_name: "Access Bank",
+          address1: "1, Bukuru Market Road",
+          lat: "9.7652591",
+          lon: "8.8597095"
+        },
+        {
+          id: 20223,
+          business_id: "bid522998e78cea7",
+          business_name: "Access Bank",
+          address1: "999c, Danmole Street",
+          lat: "6.4282689",
+          lon: "3.4121295"
+        },
+        {
+          id: 23672,
+          business_id: "bid530f061407465",
+          business_name: "Access Bank Nigeria",
+          address1: "1665, Oyin Jolayemi Street",
+          lat: "6.4294602",
+          lon: "3.4297749"
+        }
+      ];
+
+      let map;
+      function initMap() {
+        // The location of Uluru
+        var uluru = { lat: 9.082, lng: 8.6753 };
+        // The map, centered at Uluru
+        map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 7,
+          center: uluru
+        });
+        // The marker, positioned at Uluru
+        markers(map);
+      }
+
+      function markers(map) {
+        for (var i = 0; i < accessBank.length; i++) {
+          var latLng = new google.maps.LatLng(
+            accessBank[i].lat,
+            accessBank[i].lon
+          );
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+          });
+        }
+        for (var i = 0; i < diamondBank.length; i++) {
+          var latLng = new google.maps.LatLng(
+            diamondBank[i].lat,
+            diamondBank[i].lon
+          );
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+          });
+        }
+        let legend = document.querySelector("#legend");
+        let diamondEl = document.createElement("div");
+        diamondEl.innerHTML = `<img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png"/> Diamond Bank`;
+        let accessEl = document.createElement("div");
+        accessEl.innerHTML = `<img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"/> Access Bank`;
+        legend.appendChild(diamondEl);
+        legend.appendChild(accessEl);
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
+      }
+    </script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv2z91q3vP8gCLpJcPurqfNCn9pfn39HA&callback=initMap"
+    ></script>
+  </body>
+</html>
