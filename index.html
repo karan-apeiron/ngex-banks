@@ -29,7 +29,6 @@
   </head>
 
   <body>
-
     <div id="map"></div>
     <div id="legend">
       <h3>Legend</h3>
@@ -2914,9 +2913,14 @@
         // The marker, positioned at Uluru
         markers(map);
       }
-
+      let markersArr = [];
       function markers(map) {
         for (var i = 0; i < accessBank.length; i++) {
+          var locationInfowindow = new google.maps.InfoWindow({
+            content: `${accessBank[i].business_id} : ${
+              accessBank[i].business_name
+            } <br/> ${accessBank[i].address1}`
+          });
           var latLng = new google.maps.LatLng(
             accessBank[i].lat,
             accessBank[i].lon
@@ -2924,10 +2928,21 @@
           var marker = new google.maps.Marker({
             position: latLng,
             map: map,
+            InfoWindow: locationInfowindow,
             icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
           });
+          google.maps.event.addListener(marker, "click", function() {
+            hideAllInfoWindows(map);
+            this.InfoWindow.open(map, this);
+          });
+          markersArr.push(marker);
         }
         for (var i = 0; i < diamondBank.length; i++) {
+          var locationInfowindow = new google.maps.InfoWindow({
+            content: `${diamondBank[i].business_id} : ${
+              diamondBank[i].business_name
+            } <br/> ${diamondBank[i].address1}`
+          });
           var latLng = new google.maps.LatLng(
             diamondBank[i].lat,
             diamondBank[i].lon
@@ -2935,8 +2950,15 @@
           var marker = new google.maps.Marker({
             position: latLng,
             map: map,
+            InfoWindow: locationInfowindow,
             icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
           });
+          google.maps.event.addListener(marker, "click", function() {
+            hideAllInfoWindows(map);
+            console.log(`marker` + marker);
+            this.InfoWindow.open(map, this);
+          });
+          markersArr.push(marker);
         }
         let legend = document.querySelector("#legend");
         let diamondEl = document.createElement("div");
@@ -2946,6 +2968,12 @@
         legend.appendChild(diamondEl);
         legend.appendChild(accessEl);
         map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
+
+        function hideAllInfoWindows(map) {
+          markersArr.forEach(function(mark) {
+            mark.InfoWindow.close(map, mark);
+          });
+        }
       }
     </script>
     <script
