@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 100vh;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+
+      #legend {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        padding: 10px;
+        margin: 10px;
+        border: 3px solid #000;
+      }
+
+      #legend h3 {
+        margin-top: 0;
+      }
+
+      #legend img {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <div id="legend">
+      <h3>Legend</h3>
+    </div>
+
+    <script>
+      // Initialize and add the map
+      sterlingBank = [
+{"id":"52","business_id":"bid4c4e6695d79d6","business_name":"Sterling Bank","address1":"20, Marina Street","lat":"6.4489124","lon":"3.3939426"},
+{"id":"5475","business_id":"bid4dfec44752cd2","business_name":"Sterling Bank","address1":"1092, Adeola Odeku street","lat":"6.4305331","lon":"3.4156235"},
+{"id":"5476","business_id":"bid4dfec76c88e32","business_name":"Sterling Bank","address1":"127 Nnamdi Azikwe Road","lat":"5.116667","lon":"7.366667"},
+{"id":"5477","business_id":"bid4dfec8329e365","business_name":"Sterling Bank","address1":"18, Lalubu Street","lat":"7.135668","lon":"3.3362488"},
+{"id":"5478","business_id":"bid4dfecb962737f","business_name":"Sterling Bank","address1":"Plot 603, Kashim Ibrahim Way","lat":"9.0721998","lon":"7.4655865"},
+{"id":"5479","business_id":"bid4dfecd9c727a3","business_name":"Sterling Bank","address1":"5, Adesuwa Street","lat":"6.3020967","lon":"5.6159502"},
+{"id":"5480","business_id":"bid4dfecef21dc68","business_name":"Sterling Bank","address1":"Airport Road","lat":"6.5773591","lon":"3.3339563"},
+{"id":"5481","business_id":"bid4dfed01dc7128","business_name":"Sterling Bank","address1":"5, Alaba International Market Road","lat":"6.5243793","lon":"3.3792057"},
+{"id":"5482","business_id":"bid4dfed329790fe","business_name":"Sterling Bank","address1":"50\/51, International Market","lat":"6.5243793","lon":"3.3792057"},
+{"id":"5483","business_id":"bid4dfed3f307fc0","business_name":"Sterling Bank","address1":"109C, Alakoro Street","lat":"6.5243793","lon":"3.3792057"},
+{"id":"5484","business_id":"bid4dfed47118e57","business_name":"Sterling Bank","address1":"77, Allen Avenue","lat":"6.6057876","lon":"3.3498646"},
+{"id":"5485","business_id":"bid4dfed4f1b5c3a","business_name":"Sterling Bank","address1":"24, Commercial Road","lat":"6.4397522","lon":"3.3721226"},
+{"id":"5486","business_id":"bid4dfed579435c2","business_name":"Sterling Bank","address1":"7, Dr. Mike Adenuga Avenue","lat":"6.4305488","lon":"3.4133589"},
+{"id":"5487","business_id":"bid4dfed6a66ee67","business_name":"Sterling Bank","address1":"529, Old Abeokuta Road","lat":"7.3894246","lon":"3.8798247"},
+{"id":"5488","business_id":"bid4dfed76d1344c","business_name":"Sterling Bank","address1":"290 Nnebisi Road","lat":"6.2054185","lon":"6.7218572"},
+{"id":"5489","business_id":"bid4dfed88fa847b","business_name":"Sterling Bank","address1":"Opposite Aero Ccontractors","lat":"6.601838","lon":"3.3514863"},
+{"id":"5490","business_id":"bid4dfeda13bd5f3","business_name":"Sterling Bank","address1":"4, Kaduna Street","lat":"10.315833","lon":"9.844167"},
+{"id":"5491","business_id":"bid4dfee591dc6e3","business_name":"Sterling Bank","address1":"58, Mission Road","lat":"6.3457185","lon":"5.628994"},
+{"id":"5493","business_id":"bid4dfefd2c9139f","business_name":"Sterling Bank","address1":"56\/58 Sapele Road","lat":"6.2770731","lon":"5.6337011"},
+{"id":"5494","business_id":"bid4dfefdf886178","business_name":"Sterling Bank","address1":"77, Ndidem Usang ISA Road","lat":"4.9922142","lon":"8.3448706"},
+{"id":"5495","business_id":"bid4dff02c5a1892","business_name":"Sterling Bank","address1":"Plot 208 Zakariyahu, Mai-MalariI Street","lat":"9.066667","lon":"7.483333"},
+{"id":"5496","business_id":"bid4dff03a3d85ef","business_name":"Sterling Bank","address1":"97, Lagos Road","lat":"7.3821462","lon":"3.8696442"},
+{"id":"5497","business_id":"bid4dff044b0715b","business_name":"Sterling Bank","address1":"Plot 1092, Adeola Odeku Street","lat":"6.4305331","lon":"3.4156235"},
+{"id":"5498","business_id":"bid4dff054a8b6e1","business_name":"Sterling Bank","address1":"Bank Road, Daleko Market","lat":"6.533333","lon":"3.35"},
+{"id":"5499","business_id":"bid4dff061de1644","business_name":"Sterling Bank","address1":"131\/ 133 Demurin Street","lat":"6.5973339","lon":"3.3942735"},
+{"id":"5500","business_id":"bid4dff080d8bdb6","business_name":"Sterling Bank","address1":"71, Effurun-Sapele Road","lat":"5.5560257","lon":"5.7845079"},
+{"id":"5501","business_id":"bid4dff08bfa88f3","business_name":"Sterling Bank","address1":"86, Ogui Road","lat":"6.4436018","lon":"7.4969513"},
+{"id":"5502","business_id":"bid4dff09bb09139","business_name":"Sterling Bank","address1":"99, Enu-Owa Street","lat":"6.4626603","lon":"3.388111"},
+{"id":"5503","business_id":"bid4dff0af7af4d2","business_name":"Sterling Bank","address1":"3\/5 Lawrence Lane","lat":"6.5243793","lon":"3.3792057"},
+{"id":"5504","business_id":"bid4dff139480235","business_name":"Sterling Bank","address1":"Plot 21\/11, Emeka Anyaoku Street","lat":"9.0403511","lon":"7.4932699"},
+{"id":"5505","business_id":"bid4dff140c33842","business_name":"Sterling Bank","address1":"280, Herbert Macaulay Street","lat":"6.4950517","lon":"3.3808064"},
+{"id":"5506","business_id":"bid4dff14aa68fe8","business_name":"Sterling Bank","address1":"36, New Court Road","lat":"7.3869459","lon":"3.8814831"},
+{"id":"5507","business_id":"bid4dff1543b7e90","business_name":"Sterling Bank","address1":"Oyo State Govt. Secretariat Complex","lat":"7.396389","lon":"3.916667"},
+{"id":"5508","business_id":"bid4dff15c718110","business_name":"Sterling Bank","address1":"62, Docemo Street","lat":"6.4634529","lon":"3.3893838"},
+{"id":"5509","business_id":"bid4dff165a15b97","business_name":"Sterling Bank","address1":"Ibadan Road","lat":"7.0169903","lon":"3.914566"},
+{"id":"5510","business_id":"bid4dff17065606d","business_name":"Sterling Bank","address1":"91, Allen Avenue","lat":"6.6058211","lon":"3.3498465"},
+{"id":"5511","business_id":"bid4dff18222caa0","business_name":"Sterling Bank","address1":"Conoil Station","lat":"6.601838","lon":"3.3514863"},
+{"id":"5512","business_id":"bid4dff19e323409","business_name":"Sterling Bank","address1":"15, Lagos- Ikorudu Road","lat":"6.6186341","lon":"3.4600247"},
+{"id":"5513","business_id":"bid4dff1b263e8a6","business_name":"Sterling Bank","address1":"114, Awolowo Road","lat":"6.4419759","lon":"3.4183654"},
+{"id":"5514","business_id":"bid4dff1d3d78212","business_name":"Sterling Bank","address1":"40B, Ohove\\be Qtrs","lat":"6.3176","lon":"5.6145"},
+{"id":"5515","business_id":"bid4dff1f200bebb","business_name":"Sterling Bank","address1":"Plot 240, Ibrahim Taiwo Road","lat":"8.4824557","lon":"4.549804"},
+{"id":"5516","business_id":"bid4dff1fff787b9","business_name":"Sterling Bank","address1":"49A, Iwo Road","lat":"7.4145119","lon":"3.95809"},
+{"id":"5517","business_id":"bid4dff239378555","business_name":"Sterling Bank","address1":"1, Magazine Road","lat":"7.393494","lon":"3.8732007"},
+{"id":"5518","business_id":"bid4dff24965f734","business_name":"Sterling Bank","address1":"Atiku Abubakar Way","lat":"9.279167","lon":"12.445833"},
+{"id":"5519","business_id":"bid4dff263214c03","business_name":"Sterling Bank","address1":"13, Jingiri Road","lat":"9.933333","lon":"8.883333"},
+{"id":"5520","business_id":"bid4dff2773b6fa5","business_name":"Sterling Bank","address1":"1, Ahmadu Bello Way","lat":"9.9205563","lon":"8.8896747"},
+{"id":"5521","business_id":"bid4dff2831336f3","business_name":"Sterling Bank","address1":"Conoil Premises","lat":"9.066667","lon":"7.483333"},
+{"id":"5522","business_id":"bid4dff28e4d4bc2","business_name":"Sterling Bank","address1":"Conoil Premises 260","lat":"10.516667","lon":"7.433333"},
+{"id":"5523","business_id":"bid4dff29e95d48b","business_name":"Sterling Bank","address1":"Independence Road","lat":"10.5200492","lon":"7.4399238"},
+{"id":"5524","business_id":"bid4dff2ab17d14e","business_name":"Sterling Bank","address1":"KM 16, Kachia Road","lat":"10.4889457","lon":"7.4184094"},
+{"id":"5525","business_id":"bid4dff2b3697e12","business_name":"Sterling Bank","address1":"101-104, Murtala Mohammed  Way","lat":"12.0175976","lon":"8.5218811"},
+{"id":"5526","business_id":"bid4dff2b8f4ba63","business_name":"Sterling Bank","address1":"548, Ikorudu Road","lat":"6.6042683","lon":"3.390899"},
+{"id":"5527","business_id":"bid4e000adda25b1","business_name":"Sterling Bank","address1":"Etb Lasu Campus","lat":"6.4619141","lon":"3.1578875"},
+{"id":"5528","business_id":"bid4e000ca502252","business_name":"Sterling Bank","address1":"Conoil Mega Station","lat":"6.4589849","lon":"3.6015207"},
+{"id":"5529","business_id":"bid4e000e4169bc0","business_name":"Sterling Bank","address1":"5-7 Sir Kashim Ibrahim Way","lat":"11.8334941","lon":"13.120886"},
+{"id":"5530","business_id":"bid4e000f636c65f","business_name":"Sterling Bank","address1":"7, New Bridge Street","lat":"7.730556","lon":"8.536111"},
+{"id":"5531","business_id":"bid4e0013188ec26","business_name":"Sterling Bank","address1":"47, Marina Street","lat":"6.4537043","lon":"3.3856851"},
+{"id":"5532","business_id":"bid4e00139b1cda5","business_name":"Sterling Bank","address1":"19, Fatai Atere Way","lat":"6.5243793","lon":"3.3792057"},
+{"id":"5533","business_id":"bid4e0014ed28740","business_name":"Sterling Bank","address1":"Bosso Road","lat":"9.6494343","lon":"6.5358728"},
+{"id":"5534","business_id":"bid4e00156652635","business_name":"Sterling Bank","address1":"122 agege Motor Road","lat":"6.5271803","lon":"3.3544998"},
+{"id":"5535","business_id":"bid4e0016738fa57","business_name":"Sterling Bank","address1":"National Assembly Branch","lat":"9.066667","lon":"7.483333"},
+{"id":"5536","business_id":"bid4e00175c02e0a","business_name":"Sterling Bank","address1":"25, New Court Road","lat":"7.3869459","lon":"3.8814831"},
+{"id":"5537","business_id":"bid4e001cba3323f","business_name":"Sterling Bank","address1":"142, Oba Akran Road","lat":"6.6123253","lon":"3.3359362"},
+{"id":"5538","business_id":"bid4e002032eb4b5","business_name":"Sterling Bank","address1":"2A, Aguma Street","lat":"4.8033388","lon":"7.0087265"},
+{"id":"5539","business_id":"bid4e002116692b1","business_name":"Sterling Bank","address1":"Igbinedion University","lat":"6.345719","lon":"5.628994"},
+{"id":"5540","business_id":"bid4e0021bdf1240","business_name":"Sterling Bank","address1":"2, Ososami Road","lat":"7.3646732","lon":"3.8766326"},
+{"id":"5541","business_id":"bid4e00229bb1bc3","business_name":"Sterling Bank","address1":"18, Issa Williams Street","lat":"6.5243793","lon":"3.3792057"},
+{"id":"5542","business_id":"bid4e00236bb14ec","business_name":"Sterling Bank","address1":"Plot 3 (48), Okpara Avenue","lat":"6.4532906","lon":"7.4941462"},
+{"id":"5543","business_id":"bid4e00243d00c38","business_name":"Sterling Bank","address1":"101, Okota Road","lat":"6.5157334","lon":"3.3196808"},
+{"id":"5544","business_id":"bid4e002592c4316","business_name":"Sterling Bank","address1":"38, Ijaiye Rd","lat":"6.6288884","lon":"3.3379866"},
+{"id":"5545","business_id":"bid4e0026cd9076a","business_name":"Sterling Bank","address1":"45, Uga Street","lat":"6.1329168","lon":"6.7739271"},
+{"id":"5546","business_id":"bid4e002798255f2","business_name":"Sterling Bank","address1":"1, Anionwu Street","lat":"6.1487259","lon":"6.7830116"},
+{"id":"5547","business_id":"bid4e00284948842","business_name":"Sterling Bank","address1":"44, Port Harcourt Road","lat":"6.1325649","lon":"6.7794979"},
+{"id":"5548","business_id":"bid4e0028c3a7d3c","business_name":"Sterling Bank","address1":"2B, Opebi Road","lat":"6.5879612","lon":"3.3622643"},
+{"id":"5549","business_id":"bid4e00297a21204","business_name":"Sterling Bank","address1":"120, Idiroko Road","lat":"6.6817693","lon":"3.1620991"},
+{"id":"5550","business_id":"bid4e002a3e7eaad","business_name":"Sterling Bank","address1":"1 Bis Way","lat":"6.4589849","lon":"3.6015207"},
+{"id":"5551","business_id":"bid4e002aaeacb8d","business_name":"Sterling Bank","address1":"14, Aggrey Road","lat":"4.7617498","lon":"7.0234289"},
+{"id":"5552","business_id":"bid4e002b3c519a3","business_name":"Sterling Bank","address1":"204A Aba Road","lat":"4.8175689","lon":"7.0093362"},
+{"id":"5553","business_id":"bid4e002bc509861","business_name":"Sterling Bank","address1":"Plot 115, Trans Amadi Industrial Layout","lat":"4.7555368","lon":"7.0081828"},
+{"id":"5554","business_id":"bid4e002c3b38143","business_name":"Sterling Bank","address1":"50, Saka Tinubu","lat":"6.4269974","lon":"3.4212119"},
+{"id":"5555","business_id":"bid4e002ccaac561","business_name":"Sterling Bank","address1":"33, Hawley Street","lat":"6.4530751","lon":"3.404159"},
+{"id":"5556","business_id":"bid4e0036faa073d","business_name":"Sterling Bank","address1":"Plot 1695 Sanusi Fafunwa","lat":"6.431111","lon":"3.415833"},
+{"id":"5557","business_id":"bid4e0037ae87f40","business_name":"Sterling Bank","address1":"Conoil Station","lat":"6.416667","lon":"2.883333"},
+{"id":"5558","business_id":"bid4e0038492e819","business_name":"Sterling Bank","address1":"14, Sani Abacha Way","lat":"13.066667","lon":"5.233333"},
+{"id":"5559","business_id":"bid4e0038acc27e5","business_name":"Sterling Bank","address1":"52, Ogunlana Drive","lat":"6.5038768","lon":"3.3514374"},
+{"id":"5560","business_id":"bid4e003b1dd4c5c","business_name":"Sterling Bank","address1":"8C, International Centre For Commerce","lat":"6.416667","lon":"2.883333"},
+{"id":"5561","business_id":"bid4e003be99e5ae","business_name":"Sterling Bank","address1":"Plot 17C, Access Road","lat":"4.815554","lon":"7.0498442"},
+{"id":"5562","business_id":"bid4e003d51f2564","business_name":"Sterling Bank","address1":"2, Library Avenue","lat":"5.533333","lon":"7.483333"},
+{"id":"5563","business_id":"bid4e003ddfe14e4","business_name":"Sterling Bank","address1":"Conoil Station","lat":"9.066667","lon":"7.483333"},
+{"id":"5564","business_id":"bid4e003ede49c64","business_name":"Sterling Bank","address1":"Plot 16, Block 1, Abak Road Est.","lat":"5.0377396","lon":"7.9127945"},
+{"id":"5565","business_id":"bid4e003f6164670","business_name":"Sterling Bank","address1":"68B, Adeola Odeku Street","lat":"6.4305396","lon":"3.4144632"},
+{"id":"5566","business_id":"bid4e003fee64053","business_name":"Sterling Bank","address1":"75, Warri\/Sapele Road","lat":"5.5141257","lon":"5.7442466"},
+{"id":"5567","business_id":"bid4e0040a87744d","business_name":"Sterling Bank","address1":"5, Effurun-Sapele Road","lat":"5.5560257","lon":"5.7845079"},
+{"id":"5568","business_id":"bid4e004138f0c5f","business_name":"Sterling Bank","address1":"Mbiama Road","lat":"4.9301911","lon":"6.2914691"},
+{"id":"5569","business_id":"bid4e00431e19969","business_name":"Sterling Bank","address1":"Conoil Premises","lat":"9.2034963","lon":"12.4953899"},
+{"id":"5581","business_id":"bid4e006918f123a","business_name":"Sterling Bank","address1":"59, Adetokunbo Ademola Crescent","lat":"9.0767611","lon":"7.4875772"},
+{"id":"5586","business_id":"bid4e006e8e5ee6d","business_name":"Sterling Bank","address1":"37, New Market Road","lat":"6.1506886","lon":"6.7770785"},
+{"id":"5831","business_id":"bid4e04621b2a12a","business_name":"Sterling Bank","address1":"Obafemi Awolowo University Campus","lat":"7.4972811","lon":"4.522773"}
+];
+
+      keystoneBank = [
+       
+{"id":"4940","business_id":"bid4de9a98893b05","business_name":"Keystone Bank","address1":"84 Aba-Owerri Road","lat":"5.1040171","lon":"7.3497086"},
+{"id":"4941","business_id":"bid4de99fb90b6d9","business_name":"Keystone Bank","address1":"1, Bank PHB Crescent","lat":"6.433967","lon":"3.425295"},
+{"id":"4942","business_id":"bid4de9a7d7010a9","business_name":"Keystone Bank","address1":"Plot 120A Aba â€“ Owerri Road","lat":"5.1040171","lon":"7.3497086"},
+{"id":"4943","business_id":"bid4de9a8d6b8558","business_name":"Keystone Bank","address1":"88, Asa Road","lat":"5.1050282","lon":"7.3655366"},
+{"id":"4944","business_id":"bid4de9ad36e2f66","business_name":"Keystone Bank","address1":"188 Faulks Road","lat":"5.1145948","lon":"7.3418002"},
+{"id":"4945","business_id":"bid4de9ae4fe2146","business_name":"Keystone Bank","address1":"1 Akanu Ibiam Road","lat":"5.533333","lon":"7.483333"},
+{"id":"4946","business_id":"bid4de9af1bea604","business_name":"Keystone Bank","address1":"11 Galadima Aminu Road","lat":"9.2592037","lon":"12.4557993"},
+{"id":"4947","business_id":"bid4de9afa643dd8","business_name":"Keystone Bank","address1":"15, Ahmadu Bello Way","lat":"10.266667","lon":"13.266667"},
+{"id":"4948","business_id":"bid4de9b0c758df8","business_name":"Keystone Bank","address1":"Moddibo Adama Way","lat":"9.2071764","lon":"12.4880058"},
+{"id":"4949","business_id":"bid4de9b43dbc2ab","business_name":"Keystone Bank","address1":"39 Abak Road","lat":"5.0195364","lon":"7.8865805"},
+{"id":"4950","business_id":"bid4de9b82ea3100","business_name":"Keystone Bank","address1":"15 Ikot Ekpene Road","lat":"5.055971","lon":"7.877235"},
+{"id":"4951","business_id":"bid4de9ba6633323","business_name":"Keystone Bank","address1":"5 Nnamdi Azikiwe Avenue","lat":"6.2204237","lon":"7.0804456"},
+{"id":"4952","business_id":"bid4de9bb46c99f3","business_name":"Keystone Bank","address1":"6B New Market Road","lat":"6.1506886","lon":"6.7770785"},
+{"id":"4953","business_id":"bid4de9bc3496f52","business_name":"Keystone Bank","address1":"22 Ahmed Abdulkadir Road","lat":"10.315833","lon":"9.844167"},
+{"id":"4954","business_id":"bid4de9bca9edca1","business_name":"Keystone Bank","address1":"Jama'are Road","lat":"11.674167","lon":"10.191111"},
+{"id":"4955","business_id":"bid4de9be713dfca","business_name":"Keystone Bank","address1":"226 Yenagoa\/Mbiama Road","lat":"4.9301911","lon":"6.2914691"},
+{"id":"4956","business_id":"bid4de9bee722016","business_name":"Keystone Bank","address1":"Yenagoa-Mbiama Road","lat":"4.9301911","lon":"6.2914691"},
+{"id":"4957","business_id":"bid4de9cb2f4db97","business_name":"Keystone Bank","address1":"76 Iyorchia Ayo Road","lat":"7.7262957","lon":"8.5409161"},
+{"id":"4958","business_id":"bid4de9cd50dd4d3","business_name":"Keystone Bank","address1":"50 J. S. Tarkah Way","lat":"7.325","lon":"9.005"},
+{"id":"4959","business_id":"bid4de9cf3ebf378","business_name":"Keystone Bank","address1":"5 Ematayi Street","lat":"7.193056","lon":"8.146389"},
+{"id":"4960","business_id":"bid4de9d13f48e97","business_name":"Keystone Bank","address1":"5, Baga Road","lat":"11.9088717","lon":"13.0638931"},
+{"id":"4961","business_id":"bid4de9d30699ad4","business_name":"Keystone Bank","address1":"Murtala Mohammed Highway","lat":"5.0029891","lon":"8.3347609"},
+{"id":"4962","business_id":"bid4de9d4dd365c4","business_name":"Keystone Bank","address1":"441 Nnebisi Road","lat":"6.2054185","lon":"6.7218572"},
+{"id":"4963","business_id":"bid4de9d5322e52f","business_name":"Keystone Bank","address1":"68 Umejie Road","lat":"6.1804278","lon":"6.6264034"},
+{"id":"4965","business_id":"bid4de9d5ca20625","business_name":"Keystone Bank","address1":"48 Effurun - Sapele Road","lat":"5.5560257","lon":"5.7845079"}
+
+      ];
+
+      let map;
+      function initMap() {
+        // The location of Uluru
+        var uluru = { lat: 9.082, lng: 8.6753 };
+        // The map, centered at Uluru
+        map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 7,
+          center: uluru
+        });
+        // The marker, positioned at Uluru
+        markers(map);
+      }
+      let markersArr = [];
+      function markers(map) {
+        for (var i = 0; i < keystoneBank.length; i++) {
+          var locationInfowindow = new google.maps.InfoWindow({
+            content: `${keystoneBank[i].business_id} : ${
+              keystoneBank[i].business_name
+            } <br/> ${keystoneBank[i].address1}`
+          });
+          var latLng = new google.maps.LatLng(
+            keystoneBank[i].lat,
+            keystoneBank[i].lon
+          );
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            InfoWindow: locationInfowindow,
+            icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+          });
+          google.maps.event.addListener(marker, "click", function() {
+            hideAllInfoWindows(map);
+            this.InfoWindow.open(map, this);
+          });
+          markersArr.push(marker);
+        }
+        for (var i = 0; i < sterlingBank.length; i++) {
+          var locationInfowindow = new google.maps.InfoWindow({
+            content: `${sterlingBank[i].business_id} : ${
+              sterlingBank[i].business_name
+            } <br/> ${sterlingBank[i].address1}`
+          });
+          var latLng = new google.maps.LatLng(
+            sterlingBank[i].lat,
+            sterlingBank[i].lon
+          );
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            InfoWindow: locationInfowindow,
+            icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+          });
+          google.maps.event.addListener(marker, "click", function() {
+            hideAllInfoWindows(map);
+            console.log(`marker` + marker);
+            this.InfoWindow.open(map, this);
+          });
+          markersArr.push(marker);
+        }
+        let legend = document.querySelector("#legend");
+        let sterlingEl = document.createElement("div");
+        sterlingEl.innerHTML = `<img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png"/> Sterling Bank`;
+        let keystoneEl = document.createElement("div");
+        keystoneEl.innerHTML = `<img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"/> Keystone Bank`;
+        legend.appendChild(sterlingEl);
+        legend.appendChild(keystoneEl);
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
+
+        function hideAllInfoWindows(map) {
+          markersArr.forEach(function(mark) {
+            mark.InfoWindow.close(map, mark);
+          });
+        }
+      }
+    </script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv2z91q3vP8gCLpJcPurqfNCn9pfn39HA&callback=initMap"
+    ></script>
+  </body>
+</html>
