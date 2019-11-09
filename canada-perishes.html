@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    /* Set the size of the div element that contains the map */
+    #map {
+      height: 100vh;
+      /* The height is 400 pixels */
+      width: 100%;
+      /* The width is the width of the web page */
+    }
+
+    #legend {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      padding: 10px;
+      margin: 10px;
+      border: 3px solid #000;
+    }
+
+    #legend h3 {
+      margin-top: 0;
+    }
+
+    #legend img {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <div id="legend">
+    <h3>Legend</h3>
+  </div>
+
+  <!-- <script>
+    // Initialize and add the map
+    churches = [{
+      "address": "3601 c summerville road,phenix, alabama 36867,united states",
+      "lat": 32.4959483,
+      "lng": -85.014938
+    }, {
+      "address": "444 azalea road suite c,mobile, alabama 36609,united states",
+      "lat": 30.6638682,
+      "lng": -88.1523319
+    }, {
+      "address": "213 1st avenue north,birmingham, alabama 35204,united states",
+      "lat": 33.5029066,
+      "lng": -86.830727
+    }, {
+      "address": "4906 blue springs road nw,huntsville, alabama 35810,united states",
+      "lat": 34.788739,
+      "lng": -86.5977091
+    }]
+
+
+    let map;
+
+    function initMap() {
+      // The location of Uluru
+      var uluru = {
+        lat: 30.6638682,
+        lng: -88.1523319
+      };
+      // The map, centered at Uluru
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 7,
+        center: uluru
+      });
+      // The marker, positioned at Uluru
+      markers(map);
+    }
+    let markersArr = [];
+
+    function markers(map) {
+
+      for (var i = 0; i < churches.length; i++) {
+        var locationInfowindow = new google.maps.InfoWindow({
+          content: `${churches[i].address}`
+        });
+        var latLng = new google.maps.LatLng(
+          churches[i].lat,
+          churches[i].lon
+        );
+        console.log(latLng, churches[i].lat)
+        var marker = new google.maps.Marker({
+          position: latLng,
+          map: map,
+          InfoWindow: locationInfowindow,
+          icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+        });
+        console.log(`marker`, marker);
+        google.maps.event.addListener(marker, "click", function () {
+          hideAllInfoWindows(map);
+          this.InfoWindow.open(map, this);
+        });
+        markersArr.push(marker);
+      }
+      let legend = document.querySelector("#legend");
+      let sterlingEl = document.createElement("div");
+      sterlingEl.innerHTML =
+        `<img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png"/> Sterling Bank`;
+      let keystoneEl = document.createElement("div");
+      keystoneEl.innerHTML =
+        `<img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"/> Keystone Bank`;
+      legend.appendChild(sterlingEl);
+      legend.appendChild(keystoneEl);
+      map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
+
+      function hideAllInfoWindows(map) {
+        markersArr.forEach(function (mark) {
+          mark.InfoWindow.close(map, mark);
+        });
+      }
+    }
+  </script> -->
+
+  <script src="churches-canada.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv2z91q3vP8gCLpJcPurqfNCn9pfn39HA&callback=initMap">
+  </script>
+  <script type="text/javascript">
+    let map;
+
+    function initMap() {
+
+      var bounds = new google.maps.LatLngBounds();
+      let map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: new google.maps.LatLng(-33.92, 151.25),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
+      var infowindow = new google.maps.InfoWindow();
+
+      var marker, j;
+      for (j = 0; j < churches.length; j++) {
+        console.log(churches[j])
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(churches[j].lat, churches[j]
+            .lng),
+          map: map
+        })
+        google.maps.event.addListener(marker, 'click', (function (marker, j) {
+          return function () {
+            infowindow.setContent(churches[j].address);
+            infowindow.open(map, marker);
+          }
+        })(marker, j));
+        bounds.extend(marker.position);
+      }
+      map.fitBounds(bounds);
+      // for (i = 0; i < locations.length; i++) {
+      //   marker = new google.maps.Marker({
+      //     position: new google.maps.LatLng(locations[i][1], locations[i][
+      //       2
+      //     ]),
+      //     map: map
+      //   });
+
+      //   google.maps.event.addListener(marker, 'click', (function (marker, i) {
+      //     return function () {
+      //       infowindow.setContent(locations[i][0]);
+      //       infowindow.open(map, marker);
+      //     }
+      //   })(marker, i));
+      // }
+    }
+  </script>
+</body>
+
+</html>
