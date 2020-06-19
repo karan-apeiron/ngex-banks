@@ -72,22 +72,33 @@
           );
           bounds.extend(marker.position);
         }
-        //map.fitBounds(bounds);
-        // for (i = 0; i < locations.length; i++) {
-        //   marker = new google.maps.Marker({
-        //     position: new google.maps.LatLng(locations[i][1], locations[i][
-        //       2
-        //     ]),
-        //     map: map
-        //   });
+        function MyLogoControl(controlDiv) {
+          controlDiv.style.padding = '5px';
+          let html = `
+            <p style="font-size:1.4rem; color: dark-gray">Redeemed Churches, UK</p>
+            <div style="background: white; padding: 8px; border-radius: 5px">
+              <span style="font-size:1.7rem; color: gray;">Powered By: </span>
+              <img src="http://ngex.net/hasibul/ngex-new/images/logo.png" height="30px"/>
+            </div>
+          `;
 
-        //   google.maps.event.addListener(marker, 'click', (function (marker, i) {
-        //     return function () {
-        //       infowindow.setContent(locations[i][0]);
-        //       infowindow.open(map, marker);
-        //     }
-        //   })(marker, i));
-        // }
+          var logo = document.createElement('IMG');
+          logo.setAttribute('height', '40px');
+          logo.src = 'http://ngex.net/hasibul/ngex-new/images/logo.png';
+          logo.style.cursor = 'pointer';
+          controlDiv.innerHTML = html;
+          // controlDiv.appendChild(logo);
+
+          // google.maps.event.addDomListener(logo, 'click', function () {
+          //   window.location = 'http://www.example.com';
+          // });
+        }
+        var logoControlDiv = document.createElement('DIV');
+        var logoControl = new MyLogoControl(logoControlDiv);
+        logoControlDiv.index = 0; // used for ordering
+        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(
+          logoControlDiv
+        );
       }
     </script>
   </body>
