@@ -57,6 +57,24 @@ function addMarkers() {
 
 function getColor(d) {
   return d > 1000
+    ? '#650909'
+    : d > 500
+    ? '#99000d'
+    : d > 200
+    ? '#b10026'
+    : d > 100
+    ? '#e31a1c'
+    : d > 50
+    ? '#FD8D3C'
+    : d > 20
+    ? '#fd8d3c'
+    : d > 10
+    ? '#feb24c'
+    : '#ffeda0';
+}
+
+/*function getColor(d) {
+  return d > 1000
     ? '#800026'
     : d > 500
     ? '#BD0026'
@@ -71,7 +89,7 @@ function getColor(d) {
     : d > 10
     ? '#FED976'
     : '#FFEDA0';
-}
+}*/
 function style(feature) {
   return {
     fillColor: getColor(feature.properties.density),
