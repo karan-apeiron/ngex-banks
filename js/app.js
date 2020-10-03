@@ -59,19 +59,20 @@ function getColor(d) {
   return d > 1000
     ? '#650909'
     : d > 500
-    ? '#99000d'
+    ? '#650909'
     : d > 200
-    ? '#b10026'
+    ? '#99000d',
     : d > 100
-    ? '#e31a1c'
+    ? '#b10026'
     : d > 50
-    ? '#FD8D3C'
+    ? '#e31a1c'
     : d > 20
     ? '#fd8d3c'
     : d > 10
     ? '#feb24c'
     : '#ffeda0';
 }
+
 
 /*function getColor(d) {
   return d > 1000
