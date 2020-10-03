@@ -118,7 +118,6 @@ function highlightFeature(e) {
   info.update(layer.feature.properties);
 }
 function resetHighlight(e) {
-  console.log('mouseout');
   geojson.resetStyle(e.target);
   info.update();
 }
