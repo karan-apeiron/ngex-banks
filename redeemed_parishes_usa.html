@@ -51,7 +51,8 @@
         marker = new google.maps.Marker({
           position: new google.maps.LatLng(churches[j].lat, churches[j]
             .lng),
-          map: map
+          map: map,
+          icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
         })
         google.maps.event.addListener(marker, 'click', (function (marker, j) {
           return function () {

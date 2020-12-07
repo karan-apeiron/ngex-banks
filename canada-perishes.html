@@ -120,7 +120,7 @@
   <script src="churches-canada.js"></script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7a_1t83ZuJY3dQ9j8zdZ1q7vnuFyrT5Y&callback=initMap">
-  </script>
+    </script>
   <script type="text/javascript">
     let map;
 
@@ -141,7 +141,8 @@
         marker = new google.maps.Marker({
           position: new google.maps.LatLng(churches[j].lat, churches[j]
             .lng),
-          map: map
+          map: map,
+          icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
         })
         google.maps.event.addListener(marker, 'click', (function (marker, j) {
           return function () {
